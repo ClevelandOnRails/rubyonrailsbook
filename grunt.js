@@ -1,11 +1,17 @@
 module.exports = function (grunt) {
 
-  grunt.loadNpmTasks('grunt-shell');
-
   grunt.initConfig({
     watch: {
       files: ['grunt.js'],
       tasks: 'wbb:html'
+    },
+
+    sass: {
+      compile: {
+        files: {
+          'src/css/main.css': 'src/sass/main.scss'
+        }
+      }
     },
 
     shell: {
@@ -15,5 +21,8 @@ module.exports = function (grunt) {
     }
   });
 
-  grunt.registerTask('wbb:html', 'shell:make_html');
+  grunt.loadNpmTasks('grunt-shell');
+  grunt.loadNpmTasks('grunt-sass');
+
+  grunt.registerTask('wbb:html', 'sass:compile shell:make_html');
 };

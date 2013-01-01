@@ -14,6 +14,7 @@
   },
   "dependencies": {
     "grunt": "*",
-    "grunt-shell": "*"
+    "grunt-shell": "*",
+    "grunt-sass": "*"
   }
 }
