@@ -1,0 +1,19 @@
+{
+  "name": "web-book-boilerplate",
+  "title": "Web Book Boilerplate",
+  "version": "0.0.1",
+  "homepage": "https://github.com/PascalPrecht/web-book-boilerplate",
+  "author": {
+    "name": "Pascal Precht",
+    "email": "pascal.precht@gmail.com",
+    "url": "www.pascalprecht.github.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:PascalPrecht/web-book-boilerplate.git"
+  },
+  "dependencies": {
+    "grunt": "*",
+    "grunt-shell": "*"
+  }
+}
