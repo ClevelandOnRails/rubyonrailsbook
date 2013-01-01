@@ -9,7 +9,7 @@ module.exports = function (grunt) {
     sass: {
       compile: {
         files: {
-          'src/css/main.css': 'src/sass/main.scss'
+          'src/css/main.css': 'src/sass/*.scss'
         }
       }
     },
@@ -24,5 +24,5 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-shell');
   grunt.loadNpmTasks('grunt-sass');
 
-  grunt.registerTask('wbb:html', 'sass:compile shell:make_html');
+  grunt.registerTask('wbb:html', 'sass:compile');
 };
