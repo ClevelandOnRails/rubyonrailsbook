@@ -21,7 +21,7 @@ even publishing your books works like a charm.
 
 ## Quickstart
 
-Checkout the full documentation right [here](doc/toc.md)!
+Checkout the full documentation right [here](http://github.com/PascalPrecht/wbb/wiki)!
 
 ### Dependencies
 * [Pandoc](http://johnmacfarlane.net/pandoc/)
