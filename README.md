@@ -18,12 +18,12 @@ even publishing your books works like a charm.
 * Markdown-based
 * SASS support
 
-## Dependencies
-
-* [Pandoc](http://johnmacfarlane.net/pandoc/)
-* [Kindlegen](http://www.amazon.com/gp/feature.html?ie=UTF8&docId=1000765211)
 
 ## Quickstart
+
+### Dependencies
+* [Pandoc](http://johnmacfarlane.net/pandoc/)
+* [Kindlegen](http://www.amazon.com/gp/feature.html?ie=UTF8&docId=1000765211)
 
 Clone the repository via git and install the npm dependencies
 
@@ -69,3 +69,7 @@ You can also run
 $ grunt wbb:publish
 ```
 to execute all wbb tasks.
+
+## Self-Promotion
+Like wbb? Follow the repo on [Github](http://github.com/PascalPrecht/wbb). Any open questions?
+Follow Pascal Precht on [Github](http://github.com/PascalPrecht) and [Twitter](http://twitter.com/PascalPrecht).
