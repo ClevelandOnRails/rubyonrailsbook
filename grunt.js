@@ -46,6 +46,10 @@ module.exports = function (grunt) {
     shell: {
       make_html: {
         command: 'make html'
+      },
+
+      make_epub: {
+        command: 'make epub'
       }
     },
 
@@ -59,5 +63,20 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-shell');
   grunt.loadNpmTasks('grunt-sass');
 
-  grunt.registerTask('wbb:html', 'concat:markdown sass:compile concat:css mincss:main copy:minified_css shell:make_html clean:tmp clean:css');
+  grunt.registerTask('wbb:html', [
+    'concat:markdown',
+    'sass:compile',
+    'concat:css',
+    'mincss:main',
+    'copy:minified_css',
+    'shell:make_html',
+    'clean:tmp',
+    'clean:css'
+  ].join(' '));
+
+  grunt.registerTask('wbb:epub', [
+    'concat:markdown',
+    'shell:make_epub',
+    'clean:tmp'
+  ].join(' '));
 };
