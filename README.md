@@ -21,6 +21,8 @@ even publishing your books works like a charm.
 
 ## Quickstart
 
+Checkout the full documentation right [here](doc/toc.md)!
+
 ### Dependencies
 * [Pandoc](http://johnmacfarlane.net/pandoc/)
 * [Kindlegen](http://www.amazon.com/gp/feature.html?ie=UTF8&docId=1000765211)
