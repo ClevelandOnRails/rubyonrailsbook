@@ -18,14 +18,16 @@ even publishing your books works like a charm.
 * Markdown-based
 * SASS support
 
-
-## Quickstart
+## Documentation
 
 Checkout the full documentation right [here](http://github.com/PascalPrecht/wbb/wiki)!
 
-### Dependencies
+## Quickstart
+
+**Dependencies**
 * [Pandoc](http://johnmacfarlane.net/pandoc/)
 * [Kindlegen](http://www.amazon.com/gp/feature.html?ie=UTF8&docId=1000765211)
+
 
 Clone the repository via git and install the npm dependencies
 
