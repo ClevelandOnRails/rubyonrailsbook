@@ -13,7 +13,7 @@ even publishing your books works like a charm.
 
 * Grunt to automate all the things!
 * Pandoc-based doc generation
-* Supports most used formats: PDF, mobi, Epub, HTML
+* Supports most used formats: mobi, epub, HTML
 * Compatible with Leanpub
 * Markdown-based
 * SASS support

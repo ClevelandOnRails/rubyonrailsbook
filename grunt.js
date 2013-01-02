@@ -88,6 +88,10 @@ module.exports = function (grunt) {
 
       make_mobi: {
         command: 'make mobi'
+      },
+
+      all: {
+        command: 'make all'
       }
     },
 
@@ -139,5 +143,10 @@ module.exports = function (grunt) {
     'copy:chapters',
     'copy:leanpub_images',
     'copy:leanpub_files'
+  ].join(' '));
+
+  grunt.registerTask('wbb:publish', [
+    'wbb:html',
+    'shell:all'
   ].join(' '));
 };
