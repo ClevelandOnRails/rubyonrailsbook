@@ -21,3 +21,9 @@ epub:
 		--normalize \
 		--smart \
 		--toc
+
+rtf:
+	pandoc -s -N $(src) -o builds/rtf/$(file).rtf \
+		--title-prefix $(title) \
+		--normalize \
+		--smart \

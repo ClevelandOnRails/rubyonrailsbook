@@ -50,6 +50,10 @@ module.exports = function (grunt) {
 
       make_epub: {
         command: 'make epub'
+      },
+
+      make_rtf: {
+        command: 'make rtf'
       }
     },
 
@@ -77,6 +81,12 @@ module.exports = function (grunt) {
   grunt.registerTask('wbb:epub', [
     'concat:markdown',
     'shell:make_epub',
+    'clean:tmp'
+  ].join(' '));
+
+  grunt.registerTask('wbb:rtf', [
+    'concat:markdown',
+    'shell:make_rtf',
     'clean:tmp'
   ].join(' '));
 };
