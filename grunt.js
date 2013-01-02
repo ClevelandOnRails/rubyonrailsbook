@@ -89,10 +89,6 @@ module.exports = function (grunt) {
       make_mobi: {
         command: 'make mobi'
       },
-
-      all: {
-        command: 'make all'
-      }
     },
 
     clean: {
@@ -147,6 +143,9 @@ module.exports = function (grunt) {
 
   grunt.registerTask('wbb:publish', [
     'wbb:html',
-    'shell:all'
+    'wbb:epub',
+    'wbb:rtf',
+    'wbb:mobi',
+    'wbb:leanpub'
   ].join(' '));
 };

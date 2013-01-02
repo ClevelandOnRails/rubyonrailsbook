@@ -2,8 +2,6 @@ src=src/index.md
 title='Book Title'
 file='book-title'
 
-all: html mobi rtf
-
 html:
 	pandoc -s -N --section-divs $(src) -t html5 -o builds/html/index.html \
 		--css=main.min.css \
