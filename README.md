@@ -17,3 +17,12 @@ even publishing your books works like a charm.
 * Compatible with Leanpub
 * Markdown-based
 * SASS support
+
+## Dependencies
+
+* [Pandoc](http://johnmacfarlane.net/pandoc/)
+* [Kindlegen](http://www.amazon.com/gp/feature.html?ie=UTF8&docId=1000765211)
+
+## Quickstart
+
+Coming soon...
