@@ -61,6 +61,7 @@ folder which should be located in your dropbox.
 
 **Note:**
 Don't forget to update <code>src/Book.txt</code> and <code>src/Sample.txt</code>!
+
 More information: [https://leanpub.com/help/manual#the-booktxt-file](https://leanpub.com/help/manual#the-booktxt-file)
 
 You can also run
