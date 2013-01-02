@@ -2,7 +2,7 @@ module.exports = function (grunt) {
 
   grunt.initConfig({
     watch: {
-      files: ['grunt.js'],
+      files: ['grunt.js', 'src/html/*.html', 'src/chapters/*.md', 'src/sass/*.scss'],
       tasks: 'wbb:html'
     },
 
