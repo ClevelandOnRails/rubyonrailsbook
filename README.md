@@ -24,9 +24,10 @@ Checkout the full documentation right [here](http://github.com/PascalPrecht/wbb/
 
 ## Quickstart
 
-**Dependencies**
+**Dependencies:**
 * [Pandoc](http://johnmacfarlane.net/pandoc/)
 * [Kindlegen](http://www.amazon.com/gp/feature.html?ie=UTF8&docId=1000765211)
+* [SASS](http://sass-lang.com)
 
 
 Clone the repository via git and install the npm dependencies
