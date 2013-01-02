@@ -16,9 +16,33 @@ module.exports = function (grunt) {
 
     copy: {
 
+      chapters: {
+        files: {
+          'builds/leanpub/chapters/': 'src/chapters/*.md',
+        }
+      },
+
+      leanpub_images: {
+        files: {
+          'builds/leanpub/images/': 'src/images/**'
+        }
+      },
+
+      leanpub_files: {
+        files: {
+          'builds/leanpub/': 'src/*.txt'
+        }
+      },
+
+      html_images: {
+        files: {
+          'builds/html/images/': 'src/images/**'
+        }
+      },
+
       minified_css: {
         files: {
-          "builds/html/": "src/css/main.min.css"
+          'builds/html/': 'src/css/main.min.css'
         }
       },
 
@@ -32,7 +56,7 @@ module.exports = function (grunt) {
     concat: {
       markdown: {
         src: 'src/chapters/*.md',
-        dest: 'tmp/index.md'
+        dest: 'src/index.md'
       },
 
       css: {
@@ -70,7 +94,8 @@ module.exports = function (grunt) {
     clean: {
       tmp: 'tmp',
       css: 'src/css/main.min.css',
-      epub: 'builds/epub/*.mobi'
+      epub: 'builds/epub/*.mobi',
+      index: 'src/index.md'
     }
   });
 
@@ -84,21 +109,22 @@ module.exports = function (grunt) {
     'concat:css',
     'mincss:main',
     'copy:minified_css',
+    'copy:html_images',
     'shell:make_html',
-    'clean:tmp',
+    'clean:index',
     'clean:css'
   ].join(' '));
 
   grunt.registerTask('wbb:epub', [
     'concat:markdown',
     'shell:make_epub',
-    'clean:tmp'
+    'clean:index'
   ].join(' '));
 
   grunt.registerTask('wbb:rtf', [
     'concat:markdown',
     'shell:make_rtf',
-    'clean:tmp'
+    'clean:index'
   ].join(' '));
 
   grunt.registerTask('wbb:mobi', [
@@ -106,6 +132,12 @@ module.exports = function (grunt) {
     'shell:make_mobi',
     'copy:mobi',
     'clean:epub',
-    'clean:tmp'
+    'clean:index'
+  ].join(' '));
+
+  grunt.registerTask('wbb:leanpub', [
+    'copy:chapters',
+    'copy:leanpub_images',
+    'copy:leanpub_files'
   ].join(' '));
 };
