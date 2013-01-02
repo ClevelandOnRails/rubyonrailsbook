@@ -26,4 +26,7 @@ rtf:
 	pandoc -s -N $(src) -o builds/rtf/$(file).rtf \
 		--title-prefix $(title) \
 		--normalize \
-		--smart \
+		--smart
+
+mobi: epub
+	kindlegen builds/epub/$(file).epub

@@ -20,6 +20,12 @@ module.exports = function (grunt) {
         files: {
           "builds/html/": "src/css/main.min.css"
         }
+      },
+
+      mobi: {
+        files: {
+          'builds/mobi/': 'builds/epub/*.mobi'
+        }
       }
     },
 
@@ -54,12 +60,17 @@ module.exports = function (grunt) {
 
       make_rtf: {
         command: 'make rtf'
+      },
+
+      make_mobi: {
+        command: 'make mobi'
       }
     },
 
     clean: {
       tmp: 'tmp',
-      css: 'src/css/main.min.css'
+      css: 'src/css/main.min.css',
+      epub: 'builds/epub/*.mobi'
     }
   });
 
@@ -87,6 +98,14 @@ module.exports = function (grunt) {
   grunt.registerTask('wbb:rtf', [
     'concat:markdown',
     'shell:make_rtf',
+    'clean:tmp'
+  ].join(' '));
+
+  grunt.registerTask('wbb:mobi', [
+    'concat:markdown',
+    'shell:make_mobi',
+    'copy:mobi',
+    'clean:epub',
     'clean:tmp'
   ].join(' '));
 };
