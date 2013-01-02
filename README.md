@@ -1,5 +1,5 @@
 # Web Book Boilerplate
-## The easiest way of writing books for the web
+### The easiest way of writing books for the web
 
 With the Web Book Boilerplate you have the perfect place to start writing your book!
 It uses plain old markdown and generates a well structured HTML version of your written
