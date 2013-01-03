@@ -18,6 +18,9 @@ even publishing your books works like a charm.
 * Markdown-based
 * SASS support
 
+## Demo
+@tspike adapted Scott Chacon's Pro Git! Check the demo here: [http://tspike.github.com/wbb-demo/](http://tspike.github.com/wbb-demo/) and the source [https://github.com/tspike/wbb-demo](https://github.com/tspike/wbb-demo)
+
 ## Documentation
 
 Checkout the full documentation right [here](http://github.com/PascalPrecht/wbb/wiki)!
