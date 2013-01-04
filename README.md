@@ -1,84 +1,30 @@
-# Web Book Boilerplate
-### The easiest way of writing books for the web
+This is a ruby on rails course that is built for the sole purpose of teaching people who have very little/no programming skill at all
 
-With the Web Book Boilerplate you have the perfect place to start writing your book!
-It uses plain old markdown and generates a well structured HTML version of your written
-words. Since it's sitting on top of [Pandoc](http://johnmacfarlane.net/pandoc/) and
-[Grunt](http://gruntjs.com), you can easily make your books available for every platform!
+Required reading/classes/experience/etc:
 
-The Web Book Boilerplate is also compatible with [Leanpub](http://leanpub.com), so
-even publishing your books works like a charm.
+- http://tryruby.org
+- http://ruby.learncodethehardway.org/
 
-## Features
+If you understand those two, you will have the skills to go forth and follow this.
 
-* Grunt to automate all the things!
-* Pandoc-based doc generation
-* Supports most used formats: mobi, epub, HTML
-* Compatible with Leanpub
-* Markdown-based
-* SASS support
+After going through 20 pages of google search results, and finding nothing useful that was licensed for commercial use, I decided to write one. Enjoy the fruits of my labors, and please, file a github issue if you have problems.
 
-## Demo
-@tspike adapted Scott Chacon's Pro Git! Check the demo here: [http://tspike.github.com/wbb-demo/](http://tspike.github.com/wbb-demo/) and the source [https://github.com/tspike/wbb-demo](https://github.com/tspike/wbb-demo)
+[![CC-BY](http://i.creativecommons.org/l/by/3.0/88x31.png)](http://creativecommons.org/licenses/by/3.0/deed.en_US)
 
-## Documentation
+This license means you have the rights to do the following:
+  - Share — to copy, distribute and transmit the work.
+  - Remix — to adapt the work.
+  - make commercial use of the work.
+So long as you:
+  -  Provide attribution — You must attribute the work in the manner specified by the author or licensor (but not in any way that suggests that they endorse you or your use of the work). 
 
-Checkout the full documentation right [here](http://github.com/PascalPrecht/wbb/wiki)!
+For the purposes of this discussion, attribution is a required pink banner at the top of every page - er, no, that'd just be mean.
 
-## Quickstart
+Attribution is the following snippet:
 
-**Dependencies:**
-* [Pandoc](http://johnmacfarlane.net/pandoc/)
-* [Kindlegen](http://www.amazon.com/gp/feature.html?ie=UTF8&docId=1000765211)
-* [SASS](http://sass-lang.com)
+> Originally written by James Gifford <james@jamesrgifford.com>.
 
 
-Clone the repository via git and install the npm dependencies
+Any questions? No? Good, because adventure awaits you!
 
-```
-$ git clone https://github.com/PascalPrecht/wbb new-book
-$ cd new-book
-$ npm install
-```
-Ready to start! Write your book by creating chapter files in <code>src/chapters</code>.
-Add as many chapters as you want. wbb internally uses [Pandoc](http://johnmacfarlane.net/pandoc/);
-checkout their user guide for more information on writing markdown.
-
-When finished writing build your book via
-
-```
-$ grunt wbb:html
-```
-to get a ready-to-publish html version.
-
-Following formats are supported:
-
-* <code>wbb:html</code> - HTML version
-* <code>wbb:epub</code> - epub version
-* <code>wbb:mobi</code> - mobi version
-* <code>wbb:rtf</code> - rtf version
-
-If you want to publish your book on [leanpub.com](http://leanpub.com), wbb is your friend.
-It provides a task to prepare your book for the LeanPub publishing process. After running
-
-```
-$ grunt wbb:leanpub
-```
-simply copy the contents of <code>builds/leanpub</code> into your <code>manuscript</code>
-folder which should be located in your dropbox book folder.
-
-**Note:**
-Don't forget to update <code>src/Book.txt</code> and <code>src/Sample.txt</code>!
-
-More information: [https://leanpub.com/help/manual#the-booktxt-file](https://leanpub.com/help/manual#the-booktxt-file)
-
-You can also run
-
-```
-$ grunt wbb:publish
-```
-to execute all wbb tasks.
-
-## Self-Promotion
-Like wbb? Follow the repo on [Github](http://github.com/PascalPrecht/wbb). Any open questions?
-Follow Pascal Precht on [Github](http://github.com/PascalPrecht) and [Twitter](http://twitter.com/PascalPrecht).
+This is built with [The Web Book Boilerplate](https://github.com/PascalPrecht/wbb). They do an awesome job, you should go star them and take a look at how awesome they are.
