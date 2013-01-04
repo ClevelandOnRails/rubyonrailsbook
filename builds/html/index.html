@@ -7,6 +7,9 @@
   <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
   <![endif]-->
+  <style type="text/css">
+    q { quotes: "“" "”" "‘" "’"; }
+  </style>
   <link rel="stylesheet" href="main.min.css">
   
 </head>
@@ -18,11 +21,99 @@
 <p>The TOC contents are generated automatically.</p>
 <nav id="TOC">
 <ul>
-<li><a href="#chapter-one"><span class="toc-section-number">1</span> Chapter One</a></li>
+<li><a href="#chapter-one"><span class="toc-section-number">1</span> Chapter One</a><ul>
+<li><a href="#show-the-page."><span class="toc-section-number">1.1</span> Show the page.</a></li>
+</ul></li>
 </ul>
 </nav>
 <section class="level1" id="chapter-one">
 <h1><a href="#TOC"><span class="header-section-number">1</span> Chapter One</a></h1>
+<p>Lets hope that Rails 4 will be out, so I’m using a rails4 compatible setup. Hopefully.</p>
+<p>$ rails -v Rails 4.0.0.beta # at time of writing. Should return at least 4.0.0 by the time we are running things. $</p>
+<p>Now create the Demo App: Run</p>
+<pre><code>rails new DemoApp</code></pre>
+<p>Wait for it to finish, and then run</p>
+<pre><code>cd DemoApp</code></pre>
+<p>Run <code>bundle exec rails server</code> from the application folder.</p>
+<p>Now open up your web browser (I’ll be using Firefox today), and head to</p>
+<blockquote>
+<p>localhost:3000</p>
+</blockquote>
+<p>You should see something like this:</p>
+<p>![images/Chapter1-figure1.png]</p>
+<p>Now lets take a little walk through everything.</p>
+<p>First, we have the <code>app</code> folder.</p>
+<p>Inside of that, we have the assets, controllers, helpers, mailers, models and views. We’ll dig into these later, but for now, it’s enough to know that they exist, and that they do the following:</p>
+<ul>
+<li>assets is where we have our stylesheets, images, and similar things.</li>
+<li>controllers is where we glue together our views and our models.</li>
+<li>helpers is where we can define some pieces of code that we might reuse in the future.</li>
+<li>mailers are for sending email.</li>
+<li>models are where we describe things. We’ll get into that later.</li>
+<li>views are where we write the way we display the output of our code. We’ll discuss these more later.</li>
+</ul>
+<p>Next up, we have the <code>config</code> folder.</p>
+<p>We won’t dig into this right now, since this will just be confusing. As we have to edit things, we will edit things. Until then, just ignore this folder. :-)</p>
+<p>db is where we have our database, which is where we store the contents of our models. There will also be a folder called <q>migrations</q>, which is where we will discuss later, when we have an example.</p>
+<p>the doc folder can be ignored for now. I’ve never seen anyone use it.</p>
+<p>lib is where we can toss in third-party setups, but that is something that we won’t touch in this class, so we don’t need to worry about it.</p>
+<p>log is where the application logs are. This is useful for debugging.</p>
+<p>public is where we can upload things like images, our 404 and server error pages, etc. We’ll update these soon. :-)</p>
+<p>script is like lib - it’s something we won’t really touch in this class.</p>
+<p>test is where we have our automated tests. We can write tests that will make sure our application behaves like it should.</p>
+<p>tmp is the temporary directory - it can be useful to clean this out every now and again, but it’s something else you can ignore.</p>
+<p>Vendor is another one like lib - it’s for third-party libraries and resources that aren’t packaged as part of the Gemfile.</p>
+<p>Gemfile - this is where we define the third-party libraries and resources we will be using in our application. This is the preferred way of loading things if possibile.</p>
+<p>README.rdoc - the default ruby on rails readme.</p>
+<p>Rakefile - this is something else we shouldn’t need to modify. It is the definition file for the <q>Ruby make</q> utility, which we use for running some commands.</p>
+<p>Now, lets get our feet wet.</p>
+<p>Run the following command that I just pasted into the chatroom:</p>
+<pre><code>rails g scaffold article title:string body:text</code></pre>
+<p>What this will do is create a database migration, model, controller and views.</p>
+<p>Lets take a look at what we just did. Head over to</p>
+<blockquote>
+<p>localhost:3000/articles</p>
+</blockquote>
+<p>And you should get a <code>ActiveRecord::PendingMigrationError</code> error. To fix that, simply run</p>
+<pre><code>rake db:migrate</code></pre>
+<p>and then reload the page.</p>
+<p>You should see something like this:</p>
+<section class="level2" id="show-the-page.">
+<h2><a href="#TOC"><span class="header-section-number">1.1</span> Show the page.</a></h2>
+<p>Now, lets create a article. Click the <q>New Article</q> button, and fill it out.</p>
+<p>It will redirect you to the article show action.</p>
+<p>Now, let’s take a look at what is happening behind the scenes here.</p>
+<p>Open up the <code>app/controllers/articles_controller.rb</code> file.</p>
+<p>The part we are interested in is the <code>def show</code> action.</p>
+<pre><code># GET /articles/1
+# GET /articles/1.json
+def show
+  respond_to do |format|
+    format.html # show.html.erb
+    format.json { render json: @article }
+  end
+end</code></pre>
+<p>We’ll dig into exactly what this does later, but for now, let’s just remember that it mentions <code>@article</code>. This will be important soon.</p>
+<p>Now, let’s take a look at the <code>app/views/articles/show.html.erb</code> file.</p>
+<p>Notice here, it has the following lines:</p>
+<pre><code>&lt;%= @article.title %&gt;
+&lt;%= @article.body %&gt;</code></pre>
+<p>So, what does this do? Well, as we discovered earlier today, when it’s @variable.something, that generally means we’re calling a method on the variable. In these cases, we are calling the .title and .body methods, which return strings and text, respectively. Where does rails define that it’s a string vs a number?</p>
+<p>The answer lies in <code>db/migrate</code>, and in one other place.</p>
+<p>There is a file called <code>datetimestamp_create_articles.rb</code>.</p>
+<pre><code>class CreateArticles &lt; ActiveRecord::Migration
+  def change
+    create_table :articles do |t|
+      t.string :title
+      t.text :body
+
+      t.timestamps
+    end
+  end
+end</code></pre>
+<p><strong>Wording is important for the next one:</strong></p>
+<p>Now, a question: Anyone remember where the other place we mentioned it would <strong>describe</strong> itself?</p>
+</section>
 </section>
 
 </body>

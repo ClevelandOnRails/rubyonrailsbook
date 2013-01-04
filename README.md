@@ -4,8 +4,8 @@ This is a Ruby on Rails book that is built for the sole purpose of teaching peop
 
 Required reading/classes/experience/etc:
 
-- http://tryruby.org
-- http://ruby.learncodethehardway.org/
+- [tryruby.org](http://tryruby.org).
+- [ruby.learncodethehardway.org](http://ruby.learncodethehardway.org/).
 
 If you go through those two (in that order), you will have the skills to go forth and follow this.
 
@@ -30,7 +30,6 @@ Toss this into either your README, your Preface, or the credits. Whatever. I jus
 
 I'd also appreciate it if you emailed me a copy of whatever you build on top of this. I think it'd be really fun to read what people build on top of this. Anyway.
 
+This is built with [The Web Book Boilerplate](https://github.com/PascalPrecht/wbb). They do an awesome job, you should go star them and take a look at how awesome they are.
 
 Any questions? No? Good, because adventure awaits you!
-
-This is built with [The Web Book Boilerplate](https://github.com/PascalPrecht/wbb). They do an awesome job, you should go star them and take a look at how awesome they are.

@@ -22,10 +22,10 @@ Now open up your web browser (I'll be using Firefox today), and head to
 
 > localhost:3000
 
+You should see something like this:
 
 
-Welcome to Rails!
-
+![images/Chapter1-figure1.png]
 
 
 Now lets take a little walk through everything.
@@ -90,7 +90,7 @@ and then reload the page.
 
 You should see something like this:
 
-####Show the page.
+##Show the page.
 
 Now, lets create a article. Click the "New Article" button, and fill it out.
 
