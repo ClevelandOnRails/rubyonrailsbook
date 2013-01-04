@@ -25,8 +25,9 @@ Now open up your web browser (I'll be using Firefox today), and head to
 You should see something like this:
 
 
-![images/Chapter1-figure1.png]
+![Hello rails!](images/Chapter1-figure1.png)
 
+<!-- we'll stick with pure markdown for now, images be durned!-->
 
 Now lets take a little walk through everything.
 
