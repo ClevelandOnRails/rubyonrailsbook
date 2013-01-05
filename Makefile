@@ -1,6 +1,6 @@
-src=src/index.md
-title='Book Title'
-file='book-title'
+src=src/chapters/*.md
+title='Ruby On Rails: From 0-88'
+file='ruby-on-rails-from-0-to-88'
 
 html:
 	pandoc -s -N --section-divs $(src) -t html5 -o builds/html/index.html \
