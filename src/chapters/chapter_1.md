@@ -34,7 +34,7 @@ Now lets take a little walk through everything.
 Inside the rails application we just created (The DemoApp one), we have the following files - I'm going to briefly explain them.
 
 
-![Sublime Text Showing our images](images/003.png)
+![Sublime Text Showing our application's files](images/003.png)
 
 - app: This contains the controllers, models, views and assets for your application. You'll focus on this folder.
 - config: Configure your application's runtime rules, routes, database and more. We will get into this later as well.
@@ -198,4 +198,19 @@ Now, head back to the `articles/new` route, and try to make an empty article. Yo
 
 ![Error messages!](images/014.png)
 
-Ok, so, wrap up: 
+Ok, so, wrap up what we've covered:
+
+- Models.
+- A brief over view of a rails application.
+- scaffolding.
+- databases - kinda. 
+- views. not much, but we know they exist. 
+- controllers.
+- validations.
+
+
+##Extra Credit:
+
+- find out what `json` is.
+- look around in `app/views/articles/show.html.erb`, and try to figure out what it does. We will discuss it in the next chapter.
+- in `app/views/articles/_form.html.erb`, on line 4 we have the error message we saw earlier. what does `@articles.errors.count` do?

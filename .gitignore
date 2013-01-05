@@ -1,4 +1,8 @@
 *.sw?
 node_modules
 .DS_Store
-builds/*
+builds/html/*
+builds/leanpub/*
+builds/rtf/*
+builds/mobi/*
+builds/epub/*
