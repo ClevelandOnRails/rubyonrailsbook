@@ -1,4 +1,4 @@
-src=src/chapters/*.md
+src=src/index.md
 title='Ruby On Rails: From 0-88'
 file='ruby-on-rails-from-0-to-88'
 

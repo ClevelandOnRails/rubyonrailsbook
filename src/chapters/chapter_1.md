@@ -1,4 +1,4 @@
-# Chapter One
+# Chapter One: Lets Start Walking
 
 Lets hope that Rails 4 will be out, so I'm using a rails4 compatible setup. Hopefully.
 
@@ -209,7 +209,7 @@ Ok, so, wrap up what we've covered:
 - validations.
 
 
-##Extra Credit:
+##Extra Credit
 
 - find out what `json` is.
 - look around in `app/views/articles/show.html.erb`, and try to figure out what it does. We will discuss it in the next chapter.
