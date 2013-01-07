@@ -75,6 +75,10 @@ This adds in a reference to the articles model we created earlier, and sets :ind
 This is just there for timestamping - so you can do sorting by last created, first created, created within a time period, etc.
 
 
+Lets run the database migrations:
+
+![](images/023.png)
+
 Open up `app/models/article.rb`, and edit it to look like this:
 
 
@@ -96,12 +100,149 @@ Change the
 to
 
     resources :articles do
-      resources :comments do
+      resources :comments
     end
 
 
 So it should look like this:
 
 
+![](images/021.png)
+
+
+
+Next up: building a controller for our comments.
+
+
+    bundle exec rails generate controller Comments
+
+
 ![](images/022.png)
+
+
+This command generated a lot of files, so we'll take a quick look at what each of them does.
+
+- app/controllers/comments_controller.rb: This is our controller.
+- app/views/comments: This is where we will put our views. 
+- test/controllers/comments_controller_test.rb: This is a controller test. We'll dig more into tests in a future chapter.
+- app/helpers/comments_helper.rb: This is a "helper", where we can store bits of code we might reuse in our views.
+- test/helpers/comments_helper_test.rb: This is where we can test the code in our helper.
+- app/assets/javascripts/comments.js.coffee: Our coffeescript file. We'll dig into what coffeescript is later.
+- app/assets/stylesheets/comments.css.scss: This is our SCSS file, or stylesheet. It's a different way of writing plain CSS.
+
+
+Now, let's wire everything into the view.
+
+Open up `app/views/articles/show.html.erb`.
+
+![](images/024.png)
+
+And then in before the `<%= link_to 'Edit', edit_article_path(@article) %>` line, type in this:
+
+    <h2>Add a comment:</h2>
+    <%= form_for([@article, @article.comments.build]) do |f| %>
+      <p>
+        <%= f.label :commenter %><br />
+        <%= f.text_field :commenter %>
+      </p>
+      <p>
+        <%= f.label :body %><br />
+        <%= f.text_area :body %>
+      </p>
+      <p>
+        <%= f.submit %>
+      </p>
+    <% end %>
+
+
+So what does this do?
+
+Well, it creates a form for @article.comments, and then we proceed to enable then to enter in the comment's details. Lets try this out. 
+
+If you haven't already, go start your server with
+
+> bundle exec rails server
+
+
+And then head to [localhost:3000/articles](http://localhost:3000/articles/) and pick an article, or if you need to, create one.
+
+![](images/026.png)
+
+Now, go ahead and click "Create Comment".
+
+![](images/027.png)
+
+Uh-oh. We didn't make a create action in our controller. Lets fix that.
+
+
+    class CommentsController < ApplicationController
+      def create
+        @article = Article.find(params[:article_id])
+        @comment = @article.comments.create(comment_params)
+        redirect_to article_path(@article)
+      end
+
+      private
+        def comment_params
+          params.require(:comment).permit(:commenter, :body)
+        end
+    end
+
+Now, lets walk through this line by line so we understand what it does.
+
+    class CommentsController < ApplicationController
+      def create
+        @article = Article.find(params[:article_id])
+
+This creates the CommentsController class that inheirits from ApplicationController.
+It then creates the create action, and sets up the @article variable to equal the current article based off of the article_id parameters.
+
+    @comment = @article.comments.create(comment_params)
+
+this creates the `@comment` variable, which equals `@article.comments.create` - which means we're going to create a new comment. The `(comment_params)` part will make some more sense soon. 
+
+        redirect_to article_path(@article)
+
+That means that when it's all done with the stuff above it, it will redirect_to the article_path, with the parameters @article - is the article_id if you remember from above.
+
+
+      private
+        def comment_params
+          params.require(:comment).permit(:commenter, :body)
+       end
+
+So first we call the `private` keyword, which means that everything that follows is private, and can't be called outside of this controller.
+
+
+We then define the comment_params that we used earlier. Basically, we are defining what parameters we want to be whitelisted - this is to prevent people from say, editing someone elses posts. 
+
+
+Now, save the controller, and try to create a comment again. You will notice that it will succeed, but nothing will appear.
+
+Next up: Creating the view for our comments.
+
+Find the the show.html.erb file for our articles view, and open it up.
+
+Now, type this in, after `<%= @article.body %>`, and before `<%= form_for([@article, @article.comments.build]) do |f| %>`.
+
+
+    <h2>Comments</h2>
+    <% @article.comments.each do |comment| %>
+      <p>
+        <strong>Commenter:</strong>
+        <%= comment.commenter %>
+      </p>
+ 
+      <p>
+        <strong>Comment:</strong>
+        <%= comment.body %>
+      </p>
+    <% end %>
+
+Save the file, and refresh your browser. You should see this:
+
+
+![](images/028.png)
+
+
 
