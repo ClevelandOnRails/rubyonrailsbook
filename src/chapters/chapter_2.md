@@ -246,3 +246,120 @@ Save the file, and refresh your browser. You should see this:
 
 
 
+Now, lets refactor some stuff. Right now, things are getting pretty gnarly in the views, so let's extract some things to a partial.
+
+
+To do that, make the file `app/views/comments/_comment.html.erb`, with the contents below:
+
+
+    <% @article.comments.each do |comment| %>
+      <p>
+        <strong>Commenter:</strong>
+        <%= comment.commenter %>
+      </p>
+ 
+      <p>
+        <strong>Comment:</strong>
+        <%= comment.body %>
+      </p>
+    <% end %>
+
+
+
+And then change the `app/views/articles/show.html.erb` file to look like this:
+
+    <p id="notice"><%= notice %></p>
+
+    <p>
+      <strong>Title:</strong>
+      <%= @article.title %>
+     </p>
+
+    <p>
+      <strong>Body:</strong>
+      <%= @article.body %>
+    </p>
+
+
+    <h2>Comments</h2>
+
+    <%= render @article.comments %>
+
+    <%= form_for([@article, @article.comments.build]) do |f| %>
+    ....
+
+    <% end %>
+    <%= link_to 'Edit', edit_article_path(@article) %> |
+    <%= link_to 'Back', articles_path %>
+
+
+This will render the partial in `app/views/comments/_comment.html.erb` once for each comment in the array (collection) that `@article.comments` returns.
+
+
+Lets extract the new comment form into it's own partial as well.
+
+Create a file called `app/views/comments/_form.html.erb`, and put the following into it:
+
+    <%= form_for([@article, @article.comments.build]) do |f| %>
+      <p>
+        <%= f.label :commenter %><br />
+        <%= f.text_field :commenter %>
+      </p>
+      <p>
+        <%= f.label :body %><br />
+        <%= f.text_area :body %>
+      </p>
+      <p>
+        <%= f.submit %>
+      </p>
+    <% end %>
+
+
+
+Save the file, and then edit `app/views/articles.show.html.erb` to look like this:
+
+    <p id="notice"><%= notice %></p>
+
+    <p>
+      <strong>Title:</strong>
+      <%= @article.title %>
+    </p>
+
+    <p>
+      <strong>Body:</strong>
+      <%= @article.body %>
+    </p>
+
+
+    <h2>Comments</h2>
+
+    <%= render @article.comments %>
+
+    <h2>Add new comment</h2>
+    <%= render "comments/form" %>
+
+    <%= link_to 'Edit', edit_article_path(@article) %> |
+    <%= link_to 'Back', articles_path %>
+
+
+    
+Save the file, and refresh. 
+
+![](images/029.png)
+
+
+Now, lets make it so we can delete comments.
+
+
+To add the delete link, edit `app/views/comments/_comment.html.erb` to include a link:
+
+
+
+      <p>
+        <%= link_to 'Destroy Comment', [comment.article, comment],
+                    method: :delete,
+                    data: { confirm: 'Are you sure?' } %>
+      </p>
+
+
+
