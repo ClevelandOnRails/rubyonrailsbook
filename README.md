@@ -9,6 +9,8 @@ words. Since it's sitting on top of [Pandoc](http://johnmacfarlane.net/pandoc/) 
 The Web Book Boilerplate is also compatible with [Leanpub](http://leanpub.com), so
 even publishing your books works like a charm.
 
+Follow [Web Books on Twitter](http://twitter.com/webbooks_org)
+
 ## Features
 
 * Grunt to automate all the things!
