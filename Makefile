@@ -1,5 +1,5 @@
 src=src/index.md
-title='Ruby On Rails: From 0-88'
+title='Ruby on Rails: The little Gem that Could'
 file='ruby-on-rails-from-0-to-88'
 
 html:

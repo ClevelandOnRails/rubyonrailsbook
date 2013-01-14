@@ -1,3 +1,5 @@
+#Ruby on Rails: The little Gem that Could
+
 ##Welcome to the wide, wide world of Ruby on Rails
 
 This is a Ruby on Rails book that is built for the sole purpose of teaching people who have very little/no programming skill at all
@@ -33,3 +35,5 @@ I'd also appreciate it if you emailed me a copy of whatever you build on top of 
 This is built with [The Web Book Boilerplate](https://github.com/PascalPrecht/wbb). They do an awesome job, you should go star them and take a look at how awesome they are.
 
 Any questions? No? Good, because adventure awaits you!
+
+Credit to [mateo_salta](http://chat.stackexchange.com/transcript/201?m=7659237#7659237) for the name. 
