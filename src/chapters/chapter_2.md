@@ -24,6 +24,7 @@ Lets take a look at `app/models/comments.rb`
 It has the following lines in it:
 
     class Comment < ActiveRecord::Base
+      include ActiveModel::ForbiddenAttributesProtection
       belongs_to :article
     end
 
@@ -170,7 +171,10 @@ And then head to [localhost:3000/articles](http://localhost:3000/articles/) and 
 
 Now, go ahead and click "Create Comment".
 
-![](images/027.png)
+<!--\![](images/027.png)-->
+
+![](images/031.png)
+
 
 Uh-oh. We didn't make a create action in our controller. Lets fix that.
 
@@ -361,5 +365,28 @@ To add the delete link, edit `app/views/comments/_comment.html.erb` to include a
                     data: { confirm: 'Are you sure?' } %>
       </p>
 
+      
+
+So right now, if we were to try that, we'd see something like this:
+
+![](images/032.png)
+
+
+We need to define the `destroy` action in `app/controllers/comments_controller.rb`.
+
+Add the following after `create`, and before the `private`.
+      
+
+      def destroy
+        @article = Article.find(params[:article_id])
+        @comment = @article.comments.find(params[:id])
+        @comment.destroy
+        redirect_to article_path(@article)
+      end
+      
+
+So the file looks like this:
+
+![](images/033.png)
 
 

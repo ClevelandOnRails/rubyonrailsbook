@@ -1,9 +1,9 @@
 # Chapter One: Lets Start Walking
 
-Lets hope that Rails 4 will be out, so I'm using a rails4 compatible setup. Hopefully.
+
 
     $ rails -v
-    Rails 4.0.0.beta
+    Rails 3.2.11
 
 Note: At time of writing, Rails 4 is still in beta. It should return at least 4.0.0 by the time you are reading this.
 
@@ -57,7 +57,17 @@ So that's a brief, 1,000-mile-high overview of a rails application. Now what?
 Now, lets get our feet wet.
 
 
+Open up the `Gemfile`, and add in the following line at the bottom:
+
+    gem 'strong_parameters'
+
+
+Once you've done that,
 Open a new terminal window, and run the following command:
+
+    bundle install
+    
+And then when that is done, run:
 
     bundle exec rails generate scaffold article title:string body:text
 
@@ -73,10 +83,14 @@ Lets take a look at what we just did. Head over to
 
 > [http://localhost:3000/articles](http://localhost:3000/articles)
 
-And you should get a `ActiveRecord::PendingMigrationError` error. 
+And you should get a ` ActiveRecord::StatementInvalid` error. 
 
 
-[!ActiveRecord::PendingMigrationError](images/005.png)
+<!--[!ActiveRecord::PendingMigrationError](images/005.png)-->
+
+
+![ActiveRecord::StatementInvalid Error](images/030.png)
+
 
 To fix that, simply run
 
