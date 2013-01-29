@@ -390,3 +390,52 @@ So the file looks like this:
 ![](images/033.png)
 
 
+Now, you can delete articles. Go right ahead and add and delete some.
+I'll be here when you get back.
+
+
+Right now, if we delete an article, we don't delete the comments associated with it
+- they stick around in the database.
+
+We can fix that by changing a single line in `app/models/article.rb`:
+
+
+    has_many :comments, :dependent => :destroy
+
+
+Now, when you delete a article, it will delete the comments. Lets try this out.
+
+Create an article with two or three comments.
+
+![](images/034.png)
+
+Now, lets open up the rails console.
+
+    rails console
+    
+Type in `comments = Comment.last` at the prompt, and you should see something like this:
+
+    1.9.3p374 :001 > comments = Comment.last
+    
+      Comment Load (0.2ms)  SELECT "comments".* FROM "comments" ORDER BY "comments"."id" DESC LIMIT 1
+    => #<Comment id: 8, commenter: "foobar1", body: "asdlkjfaskljf", article_id: 3, created_at: "2013-01-29 22:13:34", updated_at: "2013-01-29 22:13:34"> 
+   
+    1.9.3p374 :002 > 
+
+    
+Ok, now delete the article.
+
+![Click Ok, the article won't be offended.](images/035.png)
+
+
+Now re-run `comments = Comment.last` in the rails console.
+
+    1.9.3p374 :001 > comments = Comment.last
+      Comment Load (0.2ms)  SELECT "comments".* FROM "comments" ORDER BY "comments"."id" DESC LIMIT 1
+     => nil 
+    1.9.3p374 :002 > 
+
+There you go. When the parent article is deleted, so are the comments.
+
+
+
