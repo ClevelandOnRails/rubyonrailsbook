@@ -102,8 +102,10 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib');
   grunt.loadNpmTasks('grunt-shell');
   grunt.loadNpmTasks('grunt-sass');
+  grunt.loadTasks('tasks');
 
   grunt.registerTask('wbb:html', [
+    'read-book',
     'concat:markdown',
     'sass:compile',
     'concat:css',
@@ -116,18 +118,21 @@ module.exports = function (grunt) {
   ].join(' '));
 
   grunt.registerTask('wbb:epub', [
+    'read-book',
     'concat:markdown',
     'shell:make_epub',
     'clean:index'
   ].join(' '));
 
   grunt.registerTask('wbb:rtf', [
+    'read-book',
     'concat:markdown',
     'shell:make_rtf',
     'clean:index'
   ].join(' '));
 
   grunt.registerTask('wbb:mobi', [
+    'read-book',
     'concat:markdown',
     'shell:make_mobi',
     'copy:mobi',
@@ -136,6 +141,7 @@ module.exports = function (grunt) {
   ].join(' '));
 
   grunt.registerTask('wbb:leanpub', [
+    'read-book',
     'copy:chapters',
     'copy:leanpub_images',
     'copy:leanpub_files'
