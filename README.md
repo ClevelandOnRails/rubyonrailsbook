@@ -38,7 +38,7 @@ Checkout the full documentation right [here](https://github.com/WebBooks/wbb/wik
 Clone the repository via git and install the npm dependencies
 
 ```
-$ git clone https://github.com/PascalPrecht/wbb new-book
+$ git clone https://github.com/WebBooks/wbb new-book
 $ cd new-book
 $ npm install
 ```
@@ -82,5 +82,5 @@ $ grunt wbb:publish
 to execute all wbb tasks.
 
 ## Self-Promotion
-Like wbb? Follow the repo on [Github](http://github.com/PascalPrecht/wbb). Any open questions?
+Like wbb? Follow the repo on [Github](https://github.com/WebBooks/wbb). Any open questions?
 Follow Pascal Precht on [Github](http://github.com/PascalPrecht) and [Twitter](http://twitter.com/PascalPrecht).
