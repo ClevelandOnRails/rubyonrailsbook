@@ -1,6 +1,17 @@
 module.exports = function (grunt) {
 
+  function readBookContent() {
+    var _ = grunt.utils._;
+    var content = grunt.file.read('src/Book.txt', { encoding: 'utf8' });
+    var chapters = _.lines(content).filter(function (line) { return !_.isBlank(line); }).map(function (line) { return 'src/' + line; });
+    grunt.verbose.writeln('Found chapters: ' + chapters);
+    return chapters;
+  }
+
   grunt.initConfig({
+
+    chapters: readBookContent(),
+
     watch: {
       files: ['grunt.js', 'src/html/*.html', 'src/chapters/*.md', 'src/sass/*.scss'],
       tasks: 'wbb:html'
@@ -18,7 +29,7 @@ module.exports = function (grunt) {
 
       chapters: {
         files: {
-          'builds/leanpub/chapters/': 'src/chapters/*.md',
+          'builds/leanpub/chapters/': '<config:chapters>',
         }
       },
 
@@ -55,7 +66,7 @@ module.exports = function (grunt) {
 
     concat: {
       markdown: {
-        src: 'src/chapters/*.md',
+        src: '<config:chapters>',
         dest: 'src/index.md'
       },
 
@@ -102,10 +113,8 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib');
   grunt.loadNpmTasks('grunt-shell');
   grunt.loadNpmTasks('grunt-sass');
-  grunt.loadTasks('tasks');
 
   grunt.registerTask('wbb:html', [
-    'read-book',
     'concat:markdown',
     'sass:compile',
     'concat:css',
@@ -118,21 +127,18 @@ module.exports = function (grunt) {
   ].join(' '));
 
   grunt.registerTask('wbb:epub', [
-    'read-book',
     'concat:markdown',
     'shell:make_epub',
     'clean:index'
   ].join(' '));
 
   grunt.registerTask('wbb:rtf', [
-    'read-book',
     'concat:markdown',
     'shell:make_rtf',
     'clean:index'
   ].join(' '));
 
   grunt.registerTask('wbb:mobi', [
-    'read-book',
     'concat:markdown',
     'shell:make_mobi',
     'copy:mobi',
@@ -141,7 +147,6 @@ module.exports = function (grunt) {
   ].join(' '));
 
   grunt.registerTask('wbb:leanpub', [
-    'read-book',
     'copy:chapters',
     'copy:leanpub_images',
     'copy:leanpub_files'
