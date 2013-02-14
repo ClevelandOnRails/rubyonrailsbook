@@ -24,6 +24,9 @@ So long as you:
 
 For the purposes of this discussion, attribution is a required pink banner at the top of every page - er, no, that'd just be mean.
 
+
+
+
 Attribution is the following snippet:
 
 > Originally written by James Gifford <james@jamesrgifford.com>.
@@ -32,8 +35,8 @@ Toss this into either your README, your Preface, or the credits. Whatever. I jus
 
 I'd also appreciate it if you emailed me a copy of whatever you build on top of this. I think it'd be really fun to read what people build on top of this. Anyway.
 
-This is built with [The Web Book Boilerplate](https://github.com/PascalPrecht/wbb). They do an awesome job, you should go star them and take a look at how awesome they are.
 
-Any questions? No? Good, because adventure awaits you!
+Credit to [mateo_salta](http://chat.stackexchange.com/transcript/201?m=7659237#7659237) for the name.
 
-Credit to [mateo_salta](http://chat.stackexchange.com/transcript/201?m=7659237#7659237) for the name. 
+Checkout the full documentation for the framework used right [here](https://github.com/WebBooks/wbb/wiki)!
+ 

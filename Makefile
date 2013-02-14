@@ -1,6 +1,6 @@
 src=src/index.md
 title='Ruby on Rails: The little Gem that Could'
-file='ruby-on-rails-from-0-to-88'
+file='ruby-on-rails-the-little-gem-that-could'
 
 html:
 	pandoc -s -N --section-divs $(src) -t html5 -o builds/html/index.html \

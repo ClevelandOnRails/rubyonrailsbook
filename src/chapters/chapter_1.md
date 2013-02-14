@@ -1,7 +1,6 @@
 # Chapter One: Lets Start Walking
 
 
-
     $ rails -v
     Rails 3.2.11
 
@@ -192,25 +191,8 @@ Well, would ya look at that! It's empty!
 
 ![](images/013.png)
 
-so, what can we do about this? Well, we can add in some validations. Head back to your model, and type this in after the `class Article < ActiveRecord::Base` part, and before the end:
 
-
-      validates :body, :presence => true
-      validates :title, :presence => true,
-                    :length => { :minimum => 5 }
-
-
-Save the file.
-
-Before we go back to the browser, what do you think it does? Think about this for a minute or so - if in a group setting, discuss it with your pairing partner. 
-
-
-Ok, you're back? Good. 
-
-
-Now, head back to the `articles/new` route, and try to make an empty article. You should see something like this:
-
-![Error messages!](images/014.png)
+We'll fix this in Chapter 3. 
 
 Ok, so, wrap up what we've covered:
 
@@ -220,7 +202,6 @@ Ok, so, wrap up what we've covered:
 - databases - kinda. 
 - views. not much, but we know they exist. 
 - controllers.
-- validations.
 
 
 ##Extra Credit
