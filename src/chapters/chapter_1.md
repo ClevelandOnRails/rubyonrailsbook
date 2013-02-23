@@ -2,7 +2,7 @@
 
 
     $ rails -v
-    Rails 3.2.11
+    Rails 3.2.12
 
 Note: At time of writing, Rails 4 is still in beta. It should return at least 4.0.0 by the time you are reading this.
 

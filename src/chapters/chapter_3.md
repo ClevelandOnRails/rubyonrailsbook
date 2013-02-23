@@ -78,22 +78,43 @@ Let's take a quick side trip into why we should do test driven development.
 
 So, lets sum this up, and why this is relevant for us right now.
 
-Tests are important, because it helps us break the problems down into the smallest bits possible.
+Tests are *very* important, because it helps us break the problems down into the smallest bits possible.
 
-In the future, if we need to upgrade something, or re-write something, we have a safety net of your tests.
+In the future, if we need to upgrade something, or re-write something, we have a safety net of your tests - just recently, I had a dozen applications that I needed to upgrade immediately - there was a large security problem with them. It took me about 4 hours to do all 12 applications, because I had tests.
 
-  test "that with a body and title it is valid" do
-    article = Article.new(:title => "This is a title", :body => "This is a body")
-    assert article.save
-  end
 
-  test "that without a body and with a title it is valid" do
-    article = Article.new(:title => "This is a title", :body => "")
-    assert !article.save
-  end
+So now, lets write some more tests. 
 
-  test "that without a title and with a body it is valid" do
-    article = Article.new(:title => "", :body => "This is a body")
-    assert !article.save
-  end
-end
+
+Right now, we've got *a single test* that tests that without a body or a title the article is invalid. 
+
+Now, lets write one so that with a body and a title, it is *valid*.
+
+
+
+      test "that with a body and title it is valid" do
+        article = Article.new(:title => "This is a title", :body => "This is a body")
+        assert article.save
+      end
+
+
+Add the above test (remember, type it in, don't copy and paste!) *below* the second test and *above* the last end.
+
+Now re-run your tests with
+
+`rake test`
+
+
+
+
+
+      test "that without a body and with a title it is valid" do
+        article = Article.new(:title => "This is a title", :body => "")
+        assert !article.save
+      end
+
+      test "that without a title and with a body it is valid" do
+        article = Article.new(:title => "", :body => "This is a body")
+        assert !article.save
+      end
+    end
