@@ -61,6 +61,13 @@ Open up the `Gemfile`, and add in the following line at the bottom:
     gem 'strong_parameters'
 
 
+And edit `config/application.rb` - look for a line that starts with `config.active_record.whitelist_attributes`, and make it look like this:
+
+
+      config.active_record.whitelist_attributes = false
+
+
+
 Once you've done that,
 Open a new terminal window, and run the following command:
 
@@ -180,6 +187,20 @@ It's pretty sparse.
 
 Just two lines. So, what can we do here?
 
+
+Add in the following line to the model:
+
+      include ActiveModel::ForbiddenAttributesProtection
+
+
+If there was a line like
+
+      attr_accessible :body, :title
+
+
+In there, then remove it.
+
+
 Well, lets head back to the browser really quick.
 
 
@@ -188,6 +209,7 @@ Well, lets head back to the browser really quick.
 Just click the "create article" button. Don't enter anything into the form.
 
 Well, would ya look at that! It's empty!
+
 
 ![](images/013.png)
 
