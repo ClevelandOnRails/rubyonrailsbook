@@ -1,4 +1,4 @@
-# Chapter Two: Lets Take a jog around the block with some comments
+#Chapter Two: Lets Take a jog around the block with some comments
 
 
 Ok, so we've basically been making a blog here, right? Lets quickly write out the 'core' functionality of a blog:
@@ -15,18 +15,25 @@ Run this in the terminal:
 
 `bundle exec rails generate model Comment commenter:string body:text article:references`
 
-![](images/015.png)
+![](images/040.png)
 
 Lets take a look at `app/models/comments.rb`
 
 ![](images/016.png)
 
-It has the following lines in it:
+
+It probably has
+
+    attr_accessible :body, :commenter
+
+in it, modify it to look like this:
 
     class Comment < ActiveRecord::Base
       include ActiveModel::ForbiddenAttributesProtection
       belongs_to :article
     end
+
+
 
 In addition to the model, rails also generated the file `db/migrate/20130106225333_create_comments.rb`. Let's take a look inside that too:
 
@@ -83,8 +90,6 @@ Lets run the database migrations:
 Open up `app/models/article.rb`, and edit it to look like this:
 
 
-![](images/019.png)
-
 
 Now, we're going to tinker with something called 'routes'. This is a way to generate URLs from code. 
 
@@ -123,13 +128,13 @@ Next up: building a controller for our comments.
 
 This command generated a lot of files, so we'll take a quick look at what each of them does.
 
-- app/controllers/comments_controller.rb: This is our controller.
-- app/views/comments: This is where we will put our views. 
-- test/controllers/comments_controller_test.rb: This is a controller test. We'll dig more into tests in a future chapter.
-- app/helpers/comments_helper.rb: This is a "helper", where we can store bits of code we might reuse in our views.
-- test/helpers/comments_helper_test.rb: This is where we can test the code in our helper.
-- app/assets/javascripts/comments.js.coffee: Our coffeescript file. We'll dig into what coffeescript is later.
-- app/assets/stylesheets/comments.css.scss: This is our SCSS file, or stylesheet. It's a different way of writing plain CSS.
+- `app/controllers/comments_controller.rb`: This is our controller.
+- `app/views/comments`: This is where we will put our views. 
+- `spec/controllers/comments_controller_spec.rb`: This is a controller test. We'll dig more into tests in a future chapter.
+- `app/helpers/comments_helper.rb`: This is a "helper", where we can store bits of code we might reuse in our views.
+- `spec/helpers/comments_helper_spec.rb`: This is where we can test the code in our helper.
+- `app/assets/javascripts/comments.js.coffee`: Our coffeescript file. We'll dig into what coffeescript is later.
+- `app/assets/stylesheets/comments.css.scss`: This is our SCSS file, or stylesheet. It's a different way of writing plain CSS.
 
 
 Now, let's wire everything into the view.
@@ -438,4 +443,9 @@ Now re-run `comments = Comment.last` in the rails console.
 There you go. When the parent article is deleted, so are the comments.
 
 
+
+
+##Further Study:
+
+- Read through the [Rails Guide on associations.](http://guides.rubyonrails.org/association_basics.html)
 

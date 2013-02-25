@@ -4,47 +4,82 @@
 Lets talk about tests. Specifically, why we should write them.
 
 
-Remember how in chapter one we briefly talked about the test directory, and the contents?
+Remember how in chapter one we briefly talked about the rspec directory, and the contents?
 
 
 Lets take a look inside 
 
 ![](images/036.png)
 
-Not a lot there. Now, lets make this useful.
-
-Add the following below the `test "the truth" do...end` section.
-
-
-      test "without a body or title is is not valid" do
-        article = Article.new
-        
-        assert !article.save
-      end
-  
       
-Now, lets run our test.
+Now, lets run our tests.
     
-    rake test:units
+    bundle exec rake spec:models
 
 We should see something like this:
 
 ![](images/037.png)
 
 
-Uh-oh, we've got a failed test. 
 
-so, what can we do about this? Well, we can add in some validations. Head back to your model, and type this in after the `class Article < ActiveRecord::Base` part, and before the end:
+We have pending tests here. So lets take these from pending to passing.
+
+Before we do that, open up `spec/models/article_spec.rb` and edit it to look like this:
+
+    require 'spec_helper'
+
+    describe Article do
+      before { @article = Article.new(title: "Example Title", body: "this is a body") }
+
+      subject { @article }
+
+    end
+
+
+This sets up a `@article` resource that we can modify appropriately. 
+
+##Lets start by testing that is has the `body` and `title` attributes.
+
+
+Type in the following *below* the `subject { @article }` line, and *before* the `end`.
+
+    it { should respond_to(:title) }
+    it { should respond_to(:body) }
+
+
+Now, run
+
+    bundle exec rake spec:models
+
+We should have three examples, with 0 failures and 1 pending. 
+
+
+##Lets write another test.
+
+Add this test in:
+
+    describe "when body is not present" do
+      before { @article.body = "" }
+      it { should_not be_valid }
+    end
+
+
+
+And then re-run our tests.
+
+    bundle exec rake spec:models
+
+
+![](images/041.png)
+
+So, what can we do about this? Well, we can add in some validations. Head back to your model, and type this in after the `class Article < ActiveRecord::Base` part, and before the end:
 
 
       validates :body, :presence => true
-      validates :title, :presence => true,
-                    :length => { :minimum => 5 }
-
 
 Save the file.
 
-Before we go back to the browser, what do you think it does? Think about this for a minute or so - if in a group setting, discuss it with your pairing partner. 
+Before we go back to the browser, what do you think it does? Think about this for a minute or so - if in a group or pairing setting, discuss it with your pairing partner. 
 
 
 Ok, you're back? Good. 
@@ -57,14 +92,42 @@ Now, head back to the `articles/new` route, and try to make an empty article. Yo
 
 Ah re-run the test.
 
-    rake test:units
+    bundle exec rake spec:models
     
 
-![](images/038.png)
+![Yay! We have green tests!](images/038.png)
 
+
+Now, lets write another failing test, this time to test that without a title, it isn't valid. 
+
+
+    describe "when title is not present" do
+      before { @article.title = "" }
+      it { should_not be_valid }
+    end
+
+
+![](images/042.png)
+
+
+To make this test green, we need to add the following to our article model:
+
+
+      validates :title, :presence => true,
+                    :length => { :minimum => 5 }
+
+
+
+Re-run our tests.
+
+    bundle exec rake spec:models
+
+![](images/043.png)
 
 
 Let's take a quick side trip into why we should do test driven development.
+
+##Why We Write Tests.
 
 > Test-driven development (TDD) is a software development process that relies on the
 > repetition of a very short development cycle: first the developer writes an (initially failing)
@@ -83,38 +146,48 @@ Tests are *very* important, because it helps us break the problems down into the
 In the future, if we need to upgrade something, or re-write something, we have a safety net of your tests - just recently, I had a dozen applications that I needed to upgrade immediately - there was a large security problem with them. It took me about 4 hours to do all 12 applications, because I had tests.
 
 
+
+I asked that on Twitter, and here are a few of the responses I got:
+
+
+> @jrgifford I think it's better to start unit testing from the beginning so that it scales and doesn't become a struggle at a later point.
+
+[Via Issac Moore](https://twitter.com/iamramsey/status/306093052219494401)
+
+
+> @jrgifford (this coming from someone who never did unit tests and now is being forced to start)
+
+[Via Issac Moore](https://twitter.com/iamramsey/status/306093174391181312)
+
+
+> @jrgifford Unit Tests are always the first things I learn. It's a standardized set of functions in each language. Sort of like Hello World.
+
+[Via Will Smidlein](https://twitter.com/ws/status/306086152769769472)
+
+
+Unit Tests are a very important part of most companies application lifecycle, so it's worth learning from the start.
+
+
+
+##Back To Writing Tests
+
 So now, lets write some more tests. 
 
 
-Right now, we've got *a single test* that tests that without a body or a title the article is invalid. 
+Right now, we've got four tests that check the following:
 
-Now, lets write one so that with a body and a title, it is *valid*.
+- A `Article.new` has the attribute `title`.
+- A `Article.new` has the attribute `body`.
+- A `Article.new` is not valid when the `body` is not present.
+- A `Article.new` is not valid when the `title` is not present.
 
-
-
-      test "that with a body and title it is valid" do
-        article = Article.new(:title => "This is a title", :body => "This is a body")
-        assert article.save
-      end
+We need to verify that A `Article.new` is valid when both the `title` and `body` are present. 
 
 
-Add the above test (remember, type it in, don't copy and paste!) *below* the second test and *above* the last end.
+##Further Study:
 
-Now re-run your tests with
+Write that test, and the following tests:
 
-`rake test`
+- A `Article.new` is invalid when both the `body` and the `title` are not present.
+- A `Article.new` does *not* respond to `crackerjacks`.
 
-
-
-
-
-      test "that without a body and with a title it is valid" do
-        article = Article.new(:title => "This is a title", :body => "")
-        assert !article.save
-      end
-
-      test "that without a title and with a body it is valid" do
-        article = Article.new(:title => "", :body => "This is a body")
-        assert !article.save
-      end
-    end

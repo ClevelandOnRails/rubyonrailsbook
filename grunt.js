@@ -55,7 +55,7 @@ module.exports = function (grunt) {
 
     concat: {
       markdown: {
-        src: ['src/chapters/chapter_1.md', 'src/chapters/chapter_2.md', 'src/chapters/chapter_3.md'],
+        src: ['src/chapters/chapter_1.md', 'src/chapters/chapter_2.md', 'src/chapters/chapter_3.md', 'src/chapters/chapter_4.md'],
         dest: 'src/index.md'
       },
 

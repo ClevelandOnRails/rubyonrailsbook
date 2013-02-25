@@ -1,6 +1,9 @@
 # Chapter One: Lets Start Walking
 
 
+    $ ruby -v
+    ruby 2.0.0p0
+
     $ rails -v
     Rails 3.2.12
 
@@ -9,7 +12,7 @@ Note: At time of writing, Rails 4 is still in beta. It should return at least 4.
 
 Now create the Demo App: Run 
 
-    rails new DemoApp
+    rails new DemoApp --skip-test-unit
 
 Wait for it to finish, and then run
 
@@ -27,6 +30,10 @@ You should see something like this:
 ![Hello rails!](images/002.png)
 
 <!-- we'll stick with pure markdown for now, images be durned!-->
+
+
+Shut down your server by using the keyboard shortcut <kdb>Ctrl-C</kdb>
+
 
 Now lets take a little walk through everything.
 
@@ -47,7 +54,6 @@ Inside the rails application we just created (The DemoApp one), we have the foll
 - Rakefile: This file finds and loads tasks that you can run from the command prompt. The tasks are defined in the components of rails, and in Gems (dependencies defined in the Gemfile).
 - README.rdoc: This is a brief manual for your application. You need to edit this file to tell others what it does, how to configure it, any system dependecies, etc.
 - script/: Contains the rails script that will start your app and can contain other scripts you write to deploy or run your applicaiton.
-- test/: Unit tests, fixtures and other test resources. These will be covered in a future chapter.
 - tmp/: Temporary files, ignore this.
 - vendor/: A place for all third-party code. In a normal Rails applicaiton, this includes Ruby Gems, the rails source code (if you choose to install it in your actual project) and plugins containing additional prepackaged features.
 
@@ -56,9 +62,36 @@ So that's a brief, 1,000-mile-high overview of a rails application. Now what?
 Now, lets get our feet wet.
 
 
-Open up the `Gemfile`, and add in the following line at the bottom:
+Open up the `Gemfile`, and make it look like this:
 
+    source 'https://rubygems.org'
+
+    gem 'rails', '3.2.12'
+    group :assets do
+      gem 'sass-rails',   '~> 3.2.3'
+      gem 'coffee-rails', '~> 3.2.1'
+      gem 'uglifier', '>= 1.0.3'
+    end
+
+    gem 'jquery-rails'
     gem 'strong_parameters'
+
+    group :development, :test do
+      gem 'sqlite3', '1.3.5'
+      gem 'rspec-rails', '2.11.0'
+    end
+
+    group :test do
+      gem 'capybara', '1.1.2'
+    end
+
+    group :production do
+      gem 'pg', '0.12.2'
+    end
+
+
+Save the file (<kbd>Ctrl-S</kdb> for the Windows and Linux users, <kbd>Command-S</kdb> for the Mac users)
+
 
 
 And edit `config/application.rb` - look for a line that starts with `config.active_record.whitelist_attributes`, and make it look like this:
@@ -75,12 +108,26 @@ Open a new terminal window, and run the following command:
     
 And then when that is done, run:
 
-    bundle exec rails generate scaffold article title:string body:text
+
+    bundle exec rails generate rspec:install
+
+
+
+What this does is installs rspec - we'll be using it for our tests.
 
 
 You'll see something like this:
 
 ![Terminal showing command output](images/004.png)
+
+
+
+Now, lets create our first model 
+
+    bundle exec rails generate scaffold article title:string body:text
+
+
+![](images/039.png)
 
 
 What this will do is create a database migration, model, controller and views. 
@@ -89,8 +136,10 @@ Lets take a look at what we just did. Head over to
 
 > [http://localhost:3000/articles](http://localhost:3000/articles)
 
-And you should get a ` ActiveRecord::StatementInvalid` error. 
 
+If for some reason it doesn't load, open a new terminal, and run `rails server`.
+
+When the page loads, you should get a ` ActiveRecord::StatementInvalid` error. 
 
 <!--[!ActiveRecord::PendingMigrationError](images/005.png)-->
 
@@ -98,7 +147,7 @@ And you should get a ` ActiveRecord::StatementInvalid` error.
 ![ActiveRecord::StatementInvalid Error](images/030.png)
 
 
-To fix that, simply run
+To fix that, simply go back to your terminal and run
 
     bundle exec rake db:migrate
 
@@ -226,8 +275,9 @@ Ok, so, wrap up what we've covered:
 - controllers.
 
 
-##Extra Credit
+##Further Study:
 
 - find out what `json` is.
 - look around in `app/views/articles/show.html.erb`, and try to figure out what it does. We will discuss it in the next chapter.
 - in `app/views/articles/_form.html.erb`, on line 4 we have the error message we saw earlier. what does `@articles.errors.count` do?
+
