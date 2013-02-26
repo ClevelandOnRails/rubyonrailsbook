@@ -1,7 +1,7 @@
 {
   "name": "wbb",
   "title": "Web Book Boilerplate",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "homepage": "https://github.com/PascalPrecht/wbb",
   "author": {
     "name": "Pascal Precht",
@@ -10,10 +10,25 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:PascalPrecht/wbb.git"
+    "url": "git@github.com:WebBooks/wbb.git"
   },
+  "contributors": [
+    {
+      "name": "Mathieu Bruyen",
+      "email": "code@mais-h.eu",
+      "url": "www.mais-h.eu"
+    },
+    {
+      "name": "Johannes Tröger",
+      "email": "johannes.tröger@gmail.com"
+    },
+    {
+      "name": "James Gifford",
+      "email": "james@jamesrgifford.com"
+    }
+  ],
   "dependencies": {
-    "grunt": "0.3",
+    "grunt": "0.3.17",
     "grunt-contrib": "0.3",
     "grunt-shell": "0.1.4",
     "grunt-sass": "0.2.5"
