@@ -1,4 +1,9 @@
+**Attention:**
+
+Version 0.3.0 requires <code>grunt ~0.4.0</code>
+
 # Web Book Boilerplate
+
 ### The easiest way of writing books for the web
 
 With the Web Book Boilerplate you have the perfect place to start writing your book!

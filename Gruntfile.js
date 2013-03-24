@@ -1,19 +1,27 @@
 module.exports = function (grunt) {
 
   function readBookContent() {
-    var _ = grunt.utils._;
+    var _ = grunt.util._;
     var content = grunt.file.read('src/Book.txt', { encoding: 'utf8' });
-    var chapters = _.lines(content).filter(function (line) { return !_.isBlank(line); }).map(function (line) { return 'src/' + line; });
+    var chapters = _.lines(content).filter(function (line) { return !_.isBlank(line); }).map(function (line) { return line; });
     grunt.verbose.writeln('Found chapters: ' + chapters);
     return chapters;
   }
+
+  grunt.loadNpmTasks('grunt-shell');
+  grunt.loadNpmTasks('grunt-contrib-sass');
+  grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-contrib-cssmin');
 
   grunt.initConfig({
 
     chapters: readBookContent(),
 
     watch: {
-      files: ['grunt.js', 'src/html/*.html', 'src/chapters/*.md', 'src/sass/*.scss'],
+      files: ['Gruntfile.js', 'src/html/*.html', 'src/chapters/*.md', 'src/sass/*.scss'],
       tasks: 'wbb:html'
     },
 
@@ -28,39 +36,69 @@ module.exports = function (grunt) {
     copy: {
 
       chapters: {
-        files: {
-          'builds/leanpub/chapters/': '<config:chapters>',
-        }
+        files: [
+          {
+            expand: true,
+            cwd: 'src',
+            dest: 'builds/leanpub',
+            src: '<%= chapters %>',
+          }
+        ]
       },
 
       leanpub_images: {
-        files: {
-          'builds/leanpub/images/': 'src/images/**'
+        files: [
+        {
+          expand: true,
+          cwd: 'src/images/',
+          src: '**',
+          dest: 'builds/leanpub/images'
         }
+        ]
       },
 
       leanpub_files: {
-        files: {
-          'builds/leanpub/': 'src/*.txt'
-        }
+        files: [
+          {
+            expand: true,
+            cwd: 'src',
+            src: '*.txt',
+            dest: 'builds/leanpub/'
+          }
+        ]
       },
 
       html_images: {
-        files: {
-          'builds/html/images/': 'src/images/**'
-        }
+        files: [
+          {
+            expand: true,
+            cwd: 'src/images',
+            src: '**',
+            dest: 'builds/html/images'
+          }
+        ]
       },
 
       minified_css: {
-        files: {
-          'builds/html/': 'src/css/main.min.css'
-        }
+        files: [
+          {
+            expand: true,
+            cwd: 'src/css',
+            src: 'main.min.css',
+            dest: 'builds/html'
+          }
+        ]
       },
 
       mobi: {
-        files: {
-          'builds/mobi/': 'builds/epub/*.mobi'
-        }
+        files: [
+          {
+            expand: true,
+            cwd: 'builds/epub',
+            src: '*.mobi',
+            dest: 'builds/mobi'
+          }
+        ]
       }
     },
 
@@ -76,7 +114,7 @@ module.exports = function (grunt) {
       }
     },
 
-    mincss: {
+    cssmin: {
       main: {
         files: {
           'src/css/main.min.css': 'src/css/main.min.css'
@@ -93,8 +131,20 @@ module.exports = function (grunt) {
         command: 'make epub'
       },
 
+      make_epub_dir: {
+        command: 'mkdir -p builds && mkdir -p builds/epub'
+      },
+
+      make_rtf_dir: {
+        command: 'mkdir -p builds && mkdir -p builds/rtf',
+      },
+
       make_rtf: {
         command: 'make rtf'
+      },
+
+      make_mobi_dir: {
+        command: 'mkdir -p builds && mkdir -p builds/mobi'
       },
 
       make_mobi: {
@@ -110,47 +160,48 @@ module.exports = function (grunt) {
     }
   });
 
-  grunt.loadNpmTasks('grunt-contrib');
-  grunt.loadNpmTasks('grunt-shell');
-  grunt.loadNpmTasks('grunt-sass');
 
   grunt.registerTask('wbb:html', [
     'concat:markdown',
     'sass:compile',
     'concat:css',
-    'mincss:main',
+    'cssmin:main',
     'copy:minified_css',
     'copy:html_images',
     'shell:make_html',
     'clean:index',
     'clean:css'
-  ].join(' '));
+  ]);
 
   grunt.registerTask('wbb:epub', [
     'concat:markdown',
+    'shell:make_epub_dir',
     'shell:make_epub',
     'clean:index'
-  ].join(' '));
+  ]);
 
   grunt.registerTask('wbb:rtf', [
     'concat:markdown',
+    'shell:make_rtf_dir',
     'shell:make_rtf',
     'clean:index'
-  ].join(' '));
+  ]);
 
   grunt.registerTask('wbb:mobi', [
+    'wbb:epub',
     'concat:markdown',
+    'shell:make_mobi_dir',
     'shell:make_mobi',
     'copy:mobi',
     'clean:epub',
     'clean:index'
-  ].join(' '));
+  ]);
 
   grunt.registerTask('wbb:leanpub', [
     'copy:chapters',
     'copy:leanpub_images',
     'copy:leanpub_files'
-  ].join(' '));
+  ]);
 
   grunt.registerTask('wbb:publish', [
     'wbb:html',
@@ -158,5 +209,5 @@ module.exports = function (grunt) {
     'wbb:rtf',
     'wbb:mobi',
     'wbb:leanpub'
-  ].join(' '));
+  ]);
 };
