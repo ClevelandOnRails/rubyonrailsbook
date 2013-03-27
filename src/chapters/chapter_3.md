@@ -190,4 +190,3 @@ Write that test, and the following tests:
 
 - A `Article.new` is invalid when both the `body` and the `title` are not present.
 - A `Article.new` does *not* respond to `crackerjacks`.
-

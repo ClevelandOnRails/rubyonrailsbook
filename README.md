@@ -35,7 +35,6 @@ Toss this into either your README, your Preface, or the credits. Whatever. I jus
 
 I'd also appreciate it if you emailed me a copy of whatever you build on top of this. I think it'd be really fun to read what people build on top of this. Anyway.
 
-
 Credit to [mateo_salta](http://chat.stackexchange.com/transcript/201?m=7659237#7659237) for the name.
 
 Checkout the full documentation for the framework used right [here](https://github.com/WebBooks/wbb/wiki)!
