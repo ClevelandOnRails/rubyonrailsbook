@@ -94,3 +94,41 @@ Thats right. They look like normal text, not like links. Lets fix that.
 
 
 Well, how do we go about defining this? Because we are using Bootstrap for the reasons outlined above, we can use a Bootstrap class. Now, lets take a look at the bootstrap documentation. 
+
+Lets take a look at the [base CSS section of the Bootstrap docs](http://twitter.github.com/bootstrap/base-css.html).
+
+There is a lot of good stuff in here, but what we are mainly interested in is the section on buttons.
+
+There are several types of buttons we can pick.
+
+![Shiny buttons.](images/045.png)
+
+
+We'll use a red button for the delete action.
+
+Pop open `app/views/articles/index.html.erb`.
+
+
+
+Edit the part that looks like this:
+
+    <td><%= link_to 'Destroy', article, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+
+Which should be around **line 18**, to look like this.
+
+    <td><%= link_to 'Destroy', article, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-mini btn-danger' %> </td>
+
+
+Now, we're doing three things here. First, we're giving this `link_to` a CSS class of `btn`. Then, we're giving it a CSS class of `btn-mini`, and then finally we're giving it a class of `btn-danger`. The first one makes it behave like a button. The second makes it look like a small button. The third one makes it red, or rather, the danger button that we saw above.
+
+![](images/046.png)
+
+Better, but still not great. Now we'll make each link a button, really quick.
+
+- Add the `:class => "btn-mini btn"` to Show `link_to`.
+- Add the `:class => "btn-mini btn btn-inverse"` to Edit `link_to`.
+
+Much much better, but we can make it awesome.
+
+
+Now we'll toss this whole thing into a table,
