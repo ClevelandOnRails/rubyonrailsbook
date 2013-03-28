@@ -1,8 +1,25 @@
 # Chapter One: Lets Start Walking
 
 
+##Some quick notes:
+
+
+Instead of copying the code and then pasting it in your editor, we highly recommend that you type the code in - you learn better that way. While the choice is yours, you also have to keep in mind that later on, when we start asking you to work on things yourself, that you might not be able to keep up.
+
+
+We're assuming that you've gotten Ruby and Rails installed already. If you haven't, the folks over at [RailsGirls](http://guides.railsgirls.com/install/) have assembled guides for Mac, Linux and Windows. If you are in-class, the instructors are most likely using Mac or Linux as their operating system. However, if you get stuck, they can help you.
+
+
+Oh, and one more thing. Remember this: Have fun, and be challenged!
+
+##Getting Started:
+
+First, open up a terminal, and then run the following commands - they should report this:
+
     $ ruby -v
     ruby 2.0.0p0
+
+If it reports `ruby 1.9.3p392` instead of 2.0.0p0, don't worry about it. 
 
     $ rails -v
     Rails 3.2.12
