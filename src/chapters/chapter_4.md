@@ -13,7 +13,7 @@ The reasons for using Bootstrap are numerous, most of which boil down to "becaus
 
 - Bootstrap became fairly popular fairly quickly among the rails community, and the programming community at large.
 
-- Bootstrap is used at Twitter, and most bugs (with few exceptions) are fixed quickly.
+- Bootstrap is used at Twitter, and bugs are fixed quickly.
 
 - Bootstrap has good defaults, and we can utilize those to code faster.
 
@@ -50,17 +50,20 @@ Open up `app/views/layouts/application.html.erb`, and then make it look like thi
       <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>DemoApp</title>
+        <title>DemoApp</title> <!-- the page title -->
         <meta name="description" content="">
         <meta name="author" content="">
+        <!-- the two lines below load our CSS (stylesheet) and our JavaScript (javascript_include_tag) -->
         <%= stylesheet_link_tag "application", :media => "all" %>
         <%= javascript_include_tag "application" %>
+        <!-- this is for a security feature of rails. -->
         <%= csrf_meta_tags %>
       </head>
       <body>
-        <header class="navbar navbar-fixed-top">
+        <header class="navbar navbar-fixed-top"> <!-- this is the big black bar at the top of the page that we'll see in a  moment -->
           <nav class="navbar-inner">
             <div class="container">
+              <!-- we will be putting some fun stuff in here shortly. --> 
             </div>
           </nav>
         </header>
@@ -69,6 +72,7 @@ Open up `app/views/layouts/application.html.erb`, and then make it look like thi
             <div class="content">
                <div class="row">
                 <div class="span12">
+                  <!-- this is where the stuff in app/views/ will render, depending on the route we load. -->
                   <%= yield %>
                 </div>
               </div>
@@ -85,7 +89,7 @@ Open up `app/views/layouts/application.html.erb`, and then make it look like thi
 Now, refresh. Looks better, doesn't it?
 
 
-Now, you'll notice that the article modification buttons/links look a little odd.
+Now, you'll notice that the article modification links look a little odd.
 
 ![What do they look like?](images/044.png)
 
@@ -93,7 +97,7 @@ Now, you'll notice that the article modification buttons/links look a little odd
 Thats right. They look like normal text, not like links. Lets fix that.
 
 
-Well, how do we go about defining this? Because we are using Bootstrap for the reasons outlined above, we can use a Bootstrap class. Now, lets take a look at the bootstrap documentation. 
+Well, how do we go about defining this? Because we are using Bootstrap for the reasons outlined above, we can use something that is already in Bootstrap.
 
 Lets take a look at the [base CSS section of the Bootstrap docs](http://twitter.github.com/bootstrap/base-css.html).
 
@@ -106,8 +110,7 @@ There are several types of buttons we can pick.
 
 We'll use a red button for the delete action.
 
-Pop open `app/views/articles/index.html.erb`.
-
+Open `app/views/articles/index.html.erb` in your editor, if you haven't already.
 
 
 Edit the part that looks like this:
@@ -130,5 +133,36 @@ Better, but still not great. Now we'll make each link a button, really quick.
 
 Much much better, but we can make it awesome.
 
+Now we'll toss this whole thing into a bootstrap-styled table, so that it looks better and has some separation between each item, so that the user can differentiate and keep track of which item is which.
 
-Now we'll toss this whole thing into a table,
+It currently is in a table, but we'll modify it to look more bootstrapish and not as plain.
+
+
+Open up `app/views/articles/index.html.erb`, and look for the line that looks like this, right at the top of the file. 
+
+
+    <table>
+
+Change it to this:
+
+    <table class="table">
+
+Now, save and refresh your browser. 
+
+Much better, isn't it?
+
+
+##Recap:
+
+So far, we have:
+
+- Chosen a open source project, and integrated it with our application.
+
+- Gone through a little bit of the criteria for what a good open source project should have before we go and use it.
+
+- Made some changes to our HTML and our CSS.
+
+- Discovered that we can make our application look better without too much effort. 
+
+Next up: We'll be adding users to our application, and making sure that only `@user.id="1"` can edit `@article` if `.user_id==1`.
+
