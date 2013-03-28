@@ -90,7 +90,7 @@ Open up the `Gemfile`, and make it look like this:
     end
 
 
-Save the file (<kbd>Ctrl-S</kdb> for the Windows and Linux users, <kbd>Command-S</kdb> for the Mac users)
+Save the file (`Ctrl-S` for the Windows and Linux users, `Command-S` for the Mac users)
 
 
 
