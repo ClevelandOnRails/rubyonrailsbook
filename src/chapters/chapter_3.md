@@ -26,6 +26,7 @@ We have pending tests here. So lets take these from pending to passing.
 
 Before we do that, open up `spec/models/article_spec.rb` and edit it to look like this:
 
+{:lang="ruby"}
     require 'spec_helper'
 
     describe Article do
@@ -43,6 +44,7 @@ This sets up a `@article` resource that we can modify appropriately.
 
 Type in the following *below* the `subject { @article }` line, and *before* the `end`.
 
+{:lang="ruby"} 
     it { should respond_to(:title) }
     it { should respond_to(:body) }
 
@@ -58,6 +60,7 @@ We should have three examples, with 0 failures and 1 pending.
 
 Add this test in:
 
+{:lang="ruby"} 
     describe "when body is not present" do
       before { @article.body = "" }
       it { should_not be_valid }
@@ -101,6 +104,7 @@ Ah re-run the test.
 Now, lets write another failing test, this time to test that without a title, it isn't valid. 
 
 
+{:lang="ruby"} 
     describe "when title is not present" do
       before { @article.title = "" }
       it { should_not be_valid }
@@ -113,6 +117,7 @@ Now, lets write another failing test, this time to test that without a title, it
 To make this test green, we need to add the following to our article model:
 
 
+{:lang="ruby"} 
       validates :title, :presence => true,
                     :length => { :minimum => 5 }
 
@@ -144,7 +149,6 @@ So, lets sum this up, and why this is relevant for us right now.
 Tests are *very* important, because it helps us break the problems down into the smallest bits possible.
 
 In the future, if we need to upgrade something, or re-write something, we have a safety net of your tests - just recently, I had a dozen applications that I needed to upgrade immediately - there was a large security problem with them. It took me about 4 hours to do all 12 applications, because I had tests.
-
 
 
 I asked that on Twitter, and here are a few of the responses I got:

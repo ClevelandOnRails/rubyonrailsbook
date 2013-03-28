@@ -64,6 +64,8 @@ Now, lets get our feet wet.
 
 Open up the `Gemfile`, and make it look like this:
 
+{:lang="ruby"} 
+
     source 'https://rubygems.org'
 
     gem 'rails', '3.2.12'
@@ -96,7 +98,7 @@ Save the file (<kbd>Ctrl-S</kdb> for the Windows and Linux users, <kbd>Command-S
 
 And edit `config/application.rb` - look for a line that starts with `config.active_record.whitelist_attributes`, and make it look like this:
 
-
+{:lang="ruby"} 
       config.active_record.whitelist_attributes = false
 
 
@@ -177,6 +179,7 @@ Open up the `app/controllers/articles_controller.rb` file in your editor.
 
 The part we are interested in is the `def show` action.
 
+{:lang="ruby"} 
     # GET /articles/1
     # GET /articles/1.json
     def show
@@ -196,7 +199,8 @@ Now, let's take a look at the `app/views/articles/show.html.erb` file.
 
 
 Notice here, it has the following lines:
-    
+
+{:lang="erb"} 
     <%= @article.title %>
     <%= @article.body %>
 
@@ -209,6 +213,7 @@ There is a file called `20130104155555_create_articles.rb`.
 *please note that it might not be that exact file name, the 20130104155555 at the beginning of mine is a date and time stamp, and so it will change for you as well*
 
 
+{:lang="ruby"} 
     class CreateArticles < ActiveRecord::Migration
       def change
         create_table :articles do |t|
@@ -229,8 +234,9 @@ Ah, right. The Model. Lets go take a look at that, shall we?
 ![](images/012.png)
 
 
-It's pretty sparse. 
+It's pretty sparse.
 
+{:lang="ruby"} 
     class Article < ActiveRecord::Base
     end
 
@@ -239,11 +245,13 @@ Just two lines. So, what can we do here?
 
 Add in the following line to the model:
 
-      include ActiveModel::ForbiddenAttributesProtection
+{:lang="ruby"} 
+     include ActiveModel::ForbiddenAttributesProtection
 
 
 If there was a line like
 
+{:lang="ruby"} 
       attr_accessible :body, :title
 
 
@@ -280,4 +288,3 @@ Ok, so, wrap up what we've covered:
 - find out what `json` is.
 - look around in `app/views/articles/show.html.erb`, and try to figure out what it does. We will discuss it in the next chapter.
 - in `app/views/articles/_form.html.erb`, on line 4 we have the error message we saw earlier. what does `@articles.errors.count` do?
-

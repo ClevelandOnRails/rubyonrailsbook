@@ -28,6 +28,8 @@ It probably has
 
 in it, modify it to look like this:
 
+{:lang="ruby"} 
+
     class Comment < ActiveRecord::Base
       include ActiveModel::ForbiddenAttributesProtection
       belongs_to :article
@@ -40,6 +42,7 @@ In addition to the model, rails also generated the file `db/migrate/201301062253
 ![](images/017.png)
 
 
+{:lang="ruby"} 
     class CreateComments < ActiveRecord::Migration
       def change
         create_table :comments do |t|
