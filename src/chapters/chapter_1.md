@@ -116,6 +116,7 @@ Save the file (`Ctrl-S` for the Windows and Linux users, `Command-S` for the Mac
 And edit `config/application.rb` - look for a line that starts with `config.active_record.whitelist_attributes`, and make it look like this:
 
 {:lang="ruby"} 
+
       config.active_record.whitelist_attributes = false
 
 
@@ -196,7 +197,8 @@ Open up the `app/controllers/articles_controller.rb` file in your editor.
 
 The part we are interested in is the `def show` action.
 
-{:lang="ruby"} 
+{:lang="ruby"}
+
     # GET /articles/1
     # GET /articles/1.json
     def show
@@ -218,6 +220,7 @@ Now, let's take a look at the `app/views/articles/show.html.erb` file.
 Notice here, it has the following lines:
 
 {:lang="erb"} 
+
     <%= @article.title %>
     <%= @article.body %>
 
@@ -231,6 +234,7 @@ There is a file called `20130104155555_create_articles.rb`.
 
 
 {:lang="ruby"} 
+
     class CreateArticles < ActiveRecord::Migration
       def change
         create_table :articles do |t|
@@ -254,6 +258,7 @@ Ah, right. The Model. Lets go take a look at that, shall we?
 It's pretty sparse.
 
 {:lang="ruby"} 
+
     class Article < ActiveRecord::Base
     end
 
@@ -263,12 +268,14 @@ Just two lines. So, what can we do here?
 Add in the following line to the model:
 
 {:lang="ruby"} 
+
      include ActiveModel::ForbiddenAttributesProtection
 
 
 If there was a line like
 
 {:lang="ruby"} 
+
       attr_accessible :body, :title
 
 
