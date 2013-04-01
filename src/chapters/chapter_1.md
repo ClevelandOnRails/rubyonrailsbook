@@ -81,7 +81,7 @@ Now, lets get our feet wet.
 
 Open up the `Gemfile`, and make it look like this:
 
-{:lang="ruby"} 
+
 
     source 'https://rubygems.org'
 
@@ -115,7 +115,7 @@ Save the file (`Ctrl-S` for the Windows and Linux users, `Command-S` for the Mac
 
 And edit `config/application.rb` - look for a line that starts with `config.active_record.whitelist_attributes`, and make it look like this:
 
-{:lang="ruby"} 
+ 
 
       config.active_record.whitelist_attributes = false
 
@@ -197,7 +197,7 @@ Open up the `app/controllers/articles_controller.rb` file in your editor.
 
 The part we are interested in is the `def show` action.
 
-{:lang="ruby"}
+
 
     # GET /articles/1
     # GET /articles/1.json
@@ -219,7 +219,7 @@ Now, let's take a look at the `app/views/articles/show.html.erb` file.
 
 Notice here, it has the following lines:
 
-{:lang="erb"} 
+
 
     <%= @article.title %>
     <%= @article.body %>
@@ -233,7 +233,7 @@ There is a file called `20130104155555_create_articles.rb`.
 *please note that it might not be that exact file name, the 20130104155555 at the beginning of mine is a date and time stamp, and so it will change for you as well*
 
 
-{:lang="ruby"} 
+ 
 
     class CreateArticles < ActiveRecord::Migration
       def change
@@ -257,7 +257,7 @@ Ah, right. The Model. Lets go take a look at that, shall we?
 
 It's pretty sparse.
 
-{:lang="ruby"} 
+
 
     class Article < ActiveRecord::Base
     end
@@ -267,14 +267,14 @@ Just two lines. So, what can we do here?
 
 Add in the following line to the model:
 
-{:lang="ruby"} 
+
 
      include ActiveModel::ForbiddenAttributesProtection
 
 
 If there was a line like
 
-{:lang="ruby"} 
+ 
 
       attr_accessible :body, :title
 
