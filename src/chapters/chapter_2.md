@@ -74,7 +74,7 @@ This adds a column in the database called "commenter" that is a string.
 
           t.text :body
 
-This adds a column in the database called "body" that is a string.
+This adds a column in the database called "body" that is a text field.
 
           t.references :article, index: true
 
