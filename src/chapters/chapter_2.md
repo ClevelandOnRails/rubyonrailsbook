@@ -87,6 +87,8 @@ This is just there for timestamping - so you can do sorting by last created, fir
 
 Lets run the database migrations:
 
+    bundle exec rake db:migrate
+
 ![](images/023.png)
 
 Open up `app/models/article.rb`, and edit it to look like this:
