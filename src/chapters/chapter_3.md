@@ -26,7 +26,7 @@ We have pending tests here. So lets take these from pending to passing.
 
 Before we do that, open up `spec/models/article_spec.rb` and edit it to look like this:
 
-{:lang="ruby"}
+
     require 'spec_helper'
 
     describe Article do
@@ -44,7 +44,7 @@ This sets up a `@article` resource that we can modify appropriately.
 
 Type in the following *below* the `subject { @article }` line, and *before* the `end`.
 
-{:lang="ruby"} 
+ 
     it { should respond_to(:title) }
     it { should respond_to(:body) }
 
@@ -60,7 +60,7 @@ We should have three examples, with 0 failures and 1 pending.
 
 Add this test in:
 
-{:lang="ruby"} 
+
     describe "when body is not present" do
       before { @article.body = "" }
       it { should_not be_valid }
@@ -104,7 +104,6 @@ Ah re-run the test.
 Now, lets write another failing test, this time to test that without a title, it isn't valid. 
 
 
-{:lang="ruby"} 
     describe "when title is not present" do
       before { @article.title = "" }
       it { should_not be_valid }
@@ -117,7 +116,6 @@ Now, lets write another failing test, this time to test that without a title, it
 To make this test green, we need to add the following to our article model:
 
 
-{:lang="ruby"} 
       validates :title, :presence => true,
                     :length => { :minimum => 5 }
 

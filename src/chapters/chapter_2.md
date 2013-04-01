@@ -28,7 +28,7 @@ It probably has
 
 in it, modify it to look like this:
 
-{:lang="ruby"} 
+
 
     class Comment < ActiveRecord::Base
       include ActiveModel::ForbiddenAttributesProtection
@@ -42,7 +42,6 @@ In addition to the model, rails also generated the file `db/migrate/201301062253
 ![](images/017.png)
 
 
-{:lang="ruby"} 
     class CreateComments < ActiveRecord::Migration
       def change
         create_table :comments do |t|
@@ -75,7 +74,7 @@ This adds a column in the database called "commenter" that is a string.
 
           t.text :body
 
-This adds a column in the database called "body" that is a string.
+This adds a column in the database called "body" that is a text field.
 
           t.references :article, index: true
 
@@ -87,6 +86,8 @@ This is just there for timestamping - so you can do sorting by last created, fir
 
 
 Lets run the database migrations:
+
+    bundle exec rake db:migrate
 
 ![](images/023.png)
 

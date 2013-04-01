@@ -32,7 +32,7 @@ This should complete successfully. Create a new file called `app/assets/styleshe
 
 It should have the following contents:
 
-{:lang="css"} 
+ 
     @import "bootstrap";
     body { padding-top: 60px; }
     @import "bootstrap-responsive";
@@ -46,7 +46,7 @@ Upon refreshing, you should notice a few things - mainly, that the font looks mu
 
 Open up `app/views/layouts/application.html.erb`, and then make it look like this. This is one place where you can copy/paste instead of typing it in. I'll make an exception for this one piece of code.
 
-{:lang="erb"} 
+
     <!doctype html>
     <html>
       <head>
@@ -117,12 +117,12 @@ Open `app/views/articles/index.html.erb` in your editor, if you haven't already.
 
 Edit the part that looks like this:
 
-{:lang="erb"} 
+
     <td><%= link_to 'Destroy', article, method: :delete, data: { confirm: 'Are you sure?' } %></td>
 
 Which should be around **line 18**, to look like this.
 
-{:lang="erb"} 
+
     <td><%= link_to 'Destroy', article, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-mini btn-danger' %> </td>
 
 
@@ -144,12 +144,12 @@ It currently is in a table, but we'll modify it to look more bootstrapish and no
 
 Open up `app/views/articles/index.html.erb`, and look for the line that looks like this, right at the top of the file. 
 
-{:lang="html"} 
+
     <table>
 
 Change it to this:
 
-{:lang="html"} 
+
     <table class="table">
 
 Now, save and refresh your browser. 
