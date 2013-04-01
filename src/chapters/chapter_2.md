@@ -42,7 +42,6 @@ In addition to the model, rails also generated the file `db/migrate/201301062253
 ![](images/017.png)
 
 
-{:lang="ruby"} 
     class CreateComments < ActiveRecord::Migration
       def change
         create_table :comments do |t|
