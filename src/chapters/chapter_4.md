@@ -169,5 +169,5 @@ So far, we have:
 
 - Discovered that we can make our application look better without too much effort. 
 
-Next up: We'll be adding users to our application, and making sure that only `@user.id="1"` can edit `@article` if `.user_id==1`.
+Next up, we'll be using the [Git](http://git-scm.com/) version control to track and control changes in our applications codebase.
 
