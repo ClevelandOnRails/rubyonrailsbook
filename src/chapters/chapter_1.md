@@ -9,6 +9,15 @@ Instead of copying the code and then pasting it in your editor, we highly recomm
 
 We're assuming that you've gotten Ruby and Rails installed already. If you haven't, the folks over at [RailsGirls](http://guides.railsgirls.com/install/) have assembled guides for Mac, Linux and Windows. If you are in-class, the instructors are most likely using Mac or Linux as their operating system. However, if you get stuck, they can help you.
 
+We are also assuming that you've gone through at least one of the following:
+
+- [Try Ruby](http://tryruby.org).
+
+- [Learn Ruby The Hard Way](http://ruby.learncodethehardway.org/).
+
+- [Kids Ruby](http://kidsruby.com/).
+
+
 
 Oh, and one more thing. Remember this: Have fun, and be challenged!
 
