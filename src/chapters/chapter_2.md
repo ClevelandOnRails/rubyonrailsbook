@@ -28,7 +28,7 @@ It probably has
 
 in it, modify it to look like this:
 
-{:lang="ruby"} 
+
 
     class Comment < ActiveRecord::Base
       include ActiveModel::ForbiddenAttributesProtection
