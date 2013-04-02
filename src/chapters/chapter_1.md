@@ -104,10 +104,6 @@ Open up the `Gemfile`, and make it look like this:
       gem 'capybara', '1.1.2'
     end
 
-    group :production do
-      gem 'pg', '0.12.2'
-    end
-
 
 Save the file (`Ctrl-S` for the Windows and Linux users, `Command-S` for the Mac users)
 
