@@ -306,10 +306,10 @@ Ok, so, wrap up what we've covered:
 
 - Models.
 - A brief over view of a rails application.
-- scaffolding.
-- databases - kinda. 
-- views. not much, but we know they exist. 
-- controllers.
+- Scaffolding.
+- Databases - kinda. 
+- Views. not much, but we know they exist. 
+- Controllers.
 
 
 ##Further Study:
