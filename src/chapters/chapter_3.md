@@ -178,10 +178,10 @@ So now, lets write some more tests.
 
 Right now, we've got four tests that check the following:
 
-- A `Article.new` has the attribute `title`.
-- A `Article.new` has the attribute `body`.
-- A `Article.new` is not valid when the `body` is not present.
-- A `Article.new` is not valid when the `title` is not present.
+- `Article.new` has the attribute `title`.
+- `Article.new` has the attribute `body`.
+- `Article.new` is not valid when the `body` is not present.
+- `Article.new` is not valid when the `title` is not present.
 
 We need to verify that A `Article.new` is valid when both the `title` and `body` are present. 
 
@@ -190,5 +190,5 @@ We need to verify that A `Article.new` is valid when both the `title` and `body`
 
 Write that test, and the following tests:
 
-- A `Article.new` is invalid when both the `body` and the `title` are not present.
-- A `Article.new` does *not* respond to `crackerjacks`.
+- `Article.new` is invalid when both the `body` and the `title` are not present.
+- `Article.new` does *not* respond to `crackerjacks`.
