@@ -3,11 +3,11 @@
 
 Ok, so we've basically been making a blog here, right? Lets quickly write out the 'core' functionality of a blog:
 
-- blog posts/articles. 
-- comments.
-- users so we know *who* is writing the comments and articles.
-- twitter buttons.
-- a not-so-ugly lookin' design. 
+- Blog posts/articles. 
+- Comments.
+- Users so we know *who* is writing the comments and articles.
+- Twitter buttons.
+- A not-so-ugly lookin' design. 
 
 So we've got the first one sketched out already. Let's go dive into the next one. 
 
@@ -17,7 +17,7 @@ Run this in the terminal:
 
 ![](images/040.png)
 
-Lets take a look at `app/models/comments.rb`
+Let's take a look at `app/models/comments.rb`
 
 ![](images/016.png)
 
