@@ -31,7 +31,7 @@ First, open up a terminal, and then run the following commands - they should rep
 If it reports `ruby 1.9.3p392` instead of 2.0.0p0, don't worry about it. 
 
     $ rails -v
-    Rails 3.2.12
+    Rails 3.2.13
 
 Note: At time of writing, Rails 4 is still in beta. It should return at least 4.0.0 by the time you are reading this.
 
@@ -314,6 +314,6 @@ Ok, so, wrap up what we've covered:
 
 ##Further Study:
 
-- find out what `json` is.
-- look around in `app/views/articles/show.html.erb`, and try to figure out what it does. We will discuss it in the next chapter.
-- in `app/views/articles/_form.html.erb`, on line 4 we have the error message we saw earlier. what does `@articles.errors.count` do?
+- Find out what `json` is.
+- Look around in `app/views/articles/show.html.erb`, and try to figure out what it does. We will discuss it in the next chapter.
+- In `app/views/articles/_form.html.erb`, on line 4 we have the error message we saw earlier. what does `@articles.errors.count` do?
