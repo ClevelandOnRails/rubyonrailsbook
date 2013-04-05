@@ -1,4 +1,4 @@
-#Chapter 5: Controlling our Source Code
+#Chapter Five: Controlling our Source Code
 
 
 > Have you ever:

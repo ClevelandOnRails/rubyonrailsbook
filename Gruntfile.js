@@ -41,7 +41,7 @@ module.exports = function (grunt) {
             expand: true,
             cwd: 'src',
             dest: 'builds/leanpub',
-            src: '<%= chapters %>',
+            src: ['chapters/chapter_1.md', 'chapters/chapter_2.md', 'chapters/chapter_3.md', 'chapters/chapter_4.md','chapters/chapter_5.md'],
           }
         ]
       },
