@@ -63,4 +63,15 @@ Create a repository on [GitHub](https://github.com/), and push your work.
 Now, we have a git repository for our application. From now on, we will be using Git to manage our applications progress.
 
 
-Next up: We'll be adding users to our application, and making sure that only `@user.id="1"` can edit `@article` if `.user_id==1`.
+Since this is a work in progress, we will be adding additional chapters to the book. If you wish to continue learning about Ruby on Rails we reccomend the following sources:
+
+###Ruby
+
+[Ruby Koans](http://rubykoans.com/)
+[Learn Ruby The Hard Way](http://ruby.learncodethehardway.org/)
+[Ruby Learning](http://rubylearning.com/satishtalim/tutorial.html)
+
+###Rails
+
+[Rails For Zombies](http://railsforzombies.com)
+[Rails Guides](http://guides.rubyonrails.com)
