@@ -1,5 +1,5 @@
-chapters/chapter_1.src
-chapters/chapter_2.src
-chapters/chapter_3.src
-chapters/chapter_4.src
-chapters/chapter_5.src
+chapters/chapter_1.md
+chapters/chapter_2.md
+chapters/chapter_3.md
+chapters/chapter_4.md
+chapters/chapter_5.md
