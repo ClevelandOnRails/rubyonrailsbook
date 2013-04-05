@@ -1,0 +1,429 @@
+#Users, Permissions and Ownership
+
+So, first off, why do we need users, permissions and ownership?
+
+
+Users & Ownership:
+
+  - So we can know who people are.
+  - So we can find things by a user.
+  - So we can tell who wrote this.
+
+
+Permissions:
+
+  - To keep people from editing stuff that they don't own.
+
+
+
+So, first of all, we need to add the gems to our `Gemfile`.
+
+
+    gem 'sorcery'
+    gem 'cancan'
+
+
+Save the file, and re-run `bundle install`.
+
+
+
+Now, install sorcery.
+
+    rails g sorcery:install core remember_me
+
+
+Lets take a look at the migration file that just created.
+
+
+Open up the `DateTimeStamp_sorcery_core.rb` migration.
+
+
+
+    class SorceryCore < ActiveRecord::Migration
+      def self.up
+        create_table :users do |t|
+
+This creates the users table in our database.
+
+
+          t.string :username,         :null => false  # if you use another field as a username, for example email, you can safely remove this field.
+
+Username attribute.
+
+
+          t.string :email,            :default => nil # if you use this field as a username, you might want to make it :null => false.
+
+Email attribute.
+
+          t.string :crypted_password, :default => nil
+          
+Our encrypted password.
+
+          t.string :salt,             :default => nil
+
+
+Our salt (part of the password encryption process).
+
+
+          t.timestamps
+        end
+      end
+
+      def self.down
+        drop_table :users
+
+That deletes the table.
+
+
+
+Open up the `sorcery_remember_me` migration:
+
+
+    class SorceryRememberMe < ActiveRecord::Migration
+      def self.up
+        add_column :users, :remember_me_token, :string, :default => nil
+        add_column :users, :remember_me_token_expires_at, :datetime, :default => nil
+        
+        add_index :users, :remember_me_token
+      end
+
+      def self.down
+        remove_index :users, :remember_me_token
+        
+        remove_column :users, :remember_me_token_expires_at
+        remove_column :users, :remember_me_token
+      end
+    end
+
+
+Fairly self explanatory.
+
+
+We need to dig into the `sorcery` initializer that was created for us in `config/initializers/sorcery.rb`.
+
+
+Open it up, and search for `user.username_attribute_names.
+
+
+
+Edit it to look like this:
+
+
+    user.username_attribute_names = :email
+
+
+
+
+Now is a good time to commit what we have in the repository right now.
+
+
+To do that, first add the files.
+
+    git add .
+
+
+And then we need to commit them.
+
+
+    git commit -m "Added Sorcery and CanCan to the Gemfile, started installation of sorcery"
+
+
+
+
+Now, now, lets open up the User model, and add in some quick validations.
+
+
+Make it look like this:
+
+    class User < ActiveRecord::Base
+      authenticates_with_sorcery!
+      validates_confirmation_of :password
+      validates_presence_of :password, :on => :create
+      validates_presence_of :email
+      validates_uniqueness_of :email
+    end
+
+
+
+Now, we should run our migrations.
+
+
+
+    bundle exec rake db:migrate
+
+
+
+Now, we need to create a UsersController to handle the signup procedure.
+
+    rails generate controller users new
+
+
+And then we need to create a SessionsController to handle logging in.
+
+
+    rails generate controller sessions new
+
+
+By default, the `UsersController` is pretty spare:
+
+
+    class UsersController < ApplicationController
+      def new
+      end
+    end
+
+
+Lets make it actually do something.
+
+
+    class UsersController < ApplicationController
+      def new
+        @user = User.new #create a new user instance.
+      end
+
+      def create
+        @user = User.new(params[:user])
+        user.update_attributes!(user_params) #this calls the user_params that we defined below.
+        if @user.save
+          redirect_to root_url, :notice => "Signed up!"
+        else
+          render :new
+        end
+      end
+
+
+
+      private
+      def user_params #this is for strong_parameters, which replaces attr_accessible.
+        params.require(:user).permit(:email, :password, :password_confirmation)
+      end
+
+    end
+
+
+
+Now, we need to make the `users#new` action render something. 
+
+
+Open up the `users#new` view file.
+
+    <h1>Sign Up</h1>
+
+    <%= form_for @user do |f| %>
+      <% if @user.errors.any? %>
+        <div class="error_messages">
+          <h2>Form is invalid</h2>
+          <ul>
+            <% for message in @user.errors.full_messages %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+      <div class="field">
+        <%= f.label :email %> <!-- enter in their email! --> 
+        <%= f.text_field :email %>
+      </div>
+      <div class="field">
+        <%= f.label :password %>
+        <%= f.password_field :password %> <!-- enter in their password -->
+      </div>
+      <div class="field">
+        <%= f.label :password_confirmation %>
+        <%= f.password_field :password_confirmation %><!-- enter in their password confirmation, just to make sure we didn't make a typo-->
+      </div>
+      <div class="actions"><%= f.submit %></div><!-- submit! -->
+    <% end %>
+
+
+<sub>Psst. If you've forgotten what that is, it's in `app/views/users/new.html.erb`.
+
+
+
+Now, we also need to update our `sessions#new` action so that we can login.
+
+
+Our requirements for a login page are as follows:
+
+- We need textfields for the `email` and `password` attributes.
+- We need a checkbox for the `remember_me` field.
+- We need a button to actually log us in.
+
+The page outlined below does all of this.
+
+    <h1>Log in</h1>
+
+    <%= form_tag sessions_path do %>
+      <div class="field">
+        <%= label_tag :email %>
+        <%= text_field_tag :email, params[:email] %>
+      </div>
+      <div class="field">
+        <%= label_tag :password %>
+        <%= password_field_tag :password %>
+      </div>
+      <div class="field">
+        <%= check_box_tag :remember_me, 1, params[:remember_me] %>
+        <%= label_tag :remember_me %>
+      </div>
+      <div class="actions"><%= submit_tag "Log in" %></div>
+    <% end %>
+
+
+<sub>`app/views/sessions/new.html.erb`</sub>
+
+
+
+
+Now, lets add some logic to the sessions controller. 
+
+Again, our default controller is pretty vanilla:
+
+
+    class SessionsController < ApplicationController
+      def new
+      end
+    end
+
+
+
+Let's spice things up a bit.
+
+
+
+    class SessionsController < ApplicationController
+      def new
+      end
+
+      def create
+        user = login(params[:email], params[:password], params[:remember_me])
+        if user
+          redirect_back_or_to root_url, :notice => "Logged in!" #success message!
+        else
+          flash.now.alert = "Email or password was invalid." #failure!
+        end
+      end
+      
+      def destroy
+        logout
+        redirect_to root_url, :notice => "Logged out." #logged out. Come back soon!
+      end
+      
+    end
+
+
+Now, before we go any further, we need to edit our `routes.rb` file.
+
+
+Open it up, and then insert these lines:
+
+    get "logout" => "sessions#destroy", :as => "logout"
+    get "login" => "sessions#new", :as => "login"
+    get "signup" => "users#new", :as => "signup"
+    resources :users
+    resources :sessions
+    root :to => "articles#index"
+
+Save, and then run:
+
+`bundle exec rake routes`
+
+
+It should return this:
+
+    $ bundle exec rake routes
+
+              logout GET    /logout(.:format)                                 sessions#destroy
+               login GET    /login(.:format)                                  sessions#new
+              signup GET    /signup(.:format)                                 users#new
+               users GET    /users(.:format)                                  users#index
+                     POST   /users(.:format)                                  users#create
+            new_user GET    /users/new(.:format)                              users#new
+           edit_user GET    /users/:id/edit(.:format)                         users#edit
+                user GET    /users/:id(.:format)                              users#show
+                     PUT    /users/:id(.:format)                              users#update
+                     DELETE /users/:id(.:format)                              users#destroy
+            sessions GET    /sessions(.:format)                               sessions#index
+                     POST   /sessions(.:format)                               sessions#create
+         new_session GET    /sessions/new(.:format)                           sessions#new
+        edit_session GET    /sessions/:id/edit(.:format)                      sessions#edit
+             session GET    /sessions/:id(.:format)                           sessions#show
+                     PUT    /sessions/:id(.:format)                           sessions#update
+                     DELETE /sessions/:id(.:format)                           sessions#destroy
+                root        /                                                 articles#index
+        sessions_new GET    /sessions/new(.:format)                           sessions#new
+           users_new GET    /users/new(.:format)                              users#new
+    article_comments GET    /articles/:article_id/comments(.:format)          comments#index
+                     POST   /articles/:article_id/comments(.:format)          comments#create
+ new_article_comment GET    /articles/:article_id/comments/new(.:format)      comments#new
+edit_article_comment GET    /articles/:article_id/comments/:id/edit(.:format) comments#edit
+     article_comment GET    /articles/:article_id/comments/:id(.:format)      comments#show
+                     PUT    /articles/:article_id/comments/:id(.:format)      comments#update
+                     DELETE /articles/:article_id/comments/:id(.:format)      comments#destroy
+            articles GET    /articles(.:format)                               articles#index
+                     POST   /articles(.:format)                               articles#create
+         new_article GET    /articles/new(.:format)                           articles#new
+        edit_article GET    /articles/:id/edit(.:format)                      articles#edit
+             article GET    /articles/:id(.:format)                           articles#show
+                     PUT    /articles/:id(.:format)                           articles#update
+                     DELETE /articles/:id(.:format)                           articles#destroy
+
+We're almost there! 
+
+
+Because of what we just did, we need to delete the `public/index.html` page that we've currently got. To do that, run `rm public/index.html`, and then `git rm public/index.html`.
+
+Now, when you load the root_path (in other words, [`localhost:3000`](http://localhost:3000)), you should be able to see the `articles#index` action.
+
+
+Lets add in the links to the signup, login and logout pages.
+
+Now, we could put them in a number of different places, but I like to put them in my `application.html.erb` template.
+
+
+
+Insert these lines:
+
+
+        <div class="user_nav">
+          <% if current_user %>
+            Logged in as <%= current_user.email %>.
+            <%= link_to "Log out", logout_path %>
+          <% else %>
+            <%= link_to "Sign up", signup_path %> or
+            <%= link_to "Log in", login_path  %>.
+          <% end %>
+        </div>
+        <% flash.each do |name, msg| %>
+          <%= content_tag :div, msg, :id => "flash_#{name}" %>
+        <% end %>
+
+
+Put them *right* before:
+
+
+        <div class="content">
+           <div class="row">
+            <div class="span12">
+              <%= yield %>
+
+Save the file, and then restart the server.
+
+Open up the site in [your browser](http://localhost:3000), and enjoy the sight. 
+
+
+Now, we have one final thing to do: Setup CanCan.
+
+
+
+We already included `cancan` in our Gemfile, so we can go right into it.
+
+
+So what CanCan does is described best in the README:
+
+
+> CanCan is an authorization library for Ruby on Rails which restricts what resources a given user is allowed to access. All permissions are defined in a single location (the Ability class) and not duplicated across controllers, views, and database queries.
+
+
+So basically, it uses the DRY principle, that is, Don't Repeat Yourself. If you can write code in one place and have it work in multiple places, then that's great.
+

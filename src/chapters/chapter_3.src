@@ -90,7 +90,9 @@ Ok, you're back? Good.
 
 Now, head back to the `articles/new` route, and try to make an empty article. You should see something like this:
 
+
 ![Error messages!](images/014.png)
+
 
 
 Ah re-run the test.

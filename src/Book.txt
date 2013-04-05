@@ -3,3 +3,4 @@ chapters/chapter_2.src
 chapters/chapter_3.src
 chapters/chapter_4.src
 chapters/chapter_5.src
+chapters/chapter_6.src
