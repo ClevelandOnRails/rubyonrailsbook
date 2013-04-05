@@ -1,4 +1,4 @@
-#Chapter 4: Making it Look Good.
+#Chapter Four: Making it Look Good.
 
 
 Ok, so right now, our website looks a little bland. Lets spruce things up a bit.

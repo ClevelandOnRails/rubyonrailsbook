@@ -75,3 +75,6 @@ Since this is a work in progress, we will be adding additional chapters to the b
 
 [Rails For Zombies](http://railsforzombies.com)
 [Rails Guides](http://guides.rubyonrails.com)
+
+
+Thank you for reading!
