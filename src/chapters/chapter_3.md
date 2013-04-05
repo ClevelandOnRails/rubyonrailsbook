@@ -183,7 +183,7 @@ Right now, we've got four tests that check the following:
 - `Article.new` is not valid when the `body` is not present.
 - `Article.new` is not valid when the `title` is not present.
 
-We need to verify that A `Article.new` is valid when both the `title` and `body` are present. 
+We need to verify that `Article.new` is valid when both the `title` and `body` are present. 
 
 
 ##Further Study:
