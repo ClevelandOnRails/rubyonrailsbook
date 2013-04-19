@@ -1,5 +1,9 @@
 #Ruby on Rails: The little Gem that Could
 
+
+![](http://i.imgur.com/FhipYv9.jpg)
+
+
 ##Welcome to the wide, wide world of Ruby on Rails
 
 This is a Ruby on Rails book that is built for the sole purpose of teaching people who have very little/no programming skill at all
@@ -24,3 +28,5 @@ Credit to [mateo_salta](http://chat.stackexchange.com/transcript/201?m=7659237#7
 
 Checkout the full documentation for the framework used right [here](https://github.com/WebBooks/wbb/wiki)!
  
+
+> The Rails Logo was created by Kevin Milden and is distrubuted under the BY-ND Creative Commons Licence.
