@@ -28,12 +28,27 @@ First, open up a terminal, and then run the following commands - they should rep
     $ ruby -v
     ruby 2.0.0p0
 
-If it reports `ruby 1.9.3p392` instead of 2.0.0p0, don't worry about it. 
+If it reports `ruby 1.9.3p392` instead of 2.0.0p0, don't worry about it.
+
+Assuming you followed the Rails Girls instructions above, you should be able to run:
 
     $ rails -v
+
+And have it return:
+
     Rails 3.2.13
 
-Note: At time of writing, Rails 4 is still in beta. It should return at least 4.0.0 by the time you are reading this.
+If it returns 3.2.13, then we need to upgrade Rails to the latest beta.
+
+Run the following command:
+
+    gem install rails --version 4.0.0.beta1 --no-ri --no-rdoc
+
+
+And then if you run `rails -v`, it should return:
+
+
+    Rails 4.0.0.beta1
 
 
 Now create the Demo App: Run 
@@ -94,15 +109,7 @@ Open up the `Gemfile`, and make it look like this:
  
     source 'https://rubygems.org'
 
-    gem 'rails', '3.2.13'
-    group :assets do
-      gem 'sass-rails', '~> 3.2.3'
-      gem 'coffee-rails', '~> 3.2.1'
-      gem 'uglifier', '>= 1.0.3'
-    end
-
-    gem 'jquery-rails'
-    gem 'strong_parameters'
+    gem 'rails', '4.0.0.beta1'
 
     group :development, :test do
       gem 'sqlite3', '1.3.5'
@@ -110,10 +117,27 @@ Open up the `Gemfile`, and make it look like this:
       gem 'annotate', '2.5.0'
     end
 
-    group :test do
-     gem 'capybara', '1.1.2'
+    group :assets do
+      gem 'sass-rails',   '~> 4.0.0.beta1'
+      gem 'coffee-rails', '~> 4.0.0.beta1'
+
+      # See https://github.com/sstephenson/execjs#readme for more supported runtimes
+      # gem 'therubyracer', platforms: :ruby
+
+      gem 'uglifier', '>= 1.0.3'
     end
 
+    gem 'jquery-rails'
+
+    gem 'turbolinks'
+
+    gem 'jbuilder', '~> 1.0.1'
+
+
+
+    group :test do
+      gem 'capybara', '1.1.2'
+    end
 
     gem 'bootstrap-sass'
 
@@ -127,7 +151,6 @@ And edit `config/application.rb` - look for a line that starts with `config.acti
  
 
       config.active_record.whitelist_attributes = false
-
 
 
 Once you've done that,
@@ -152,6 +175,7 @@ You'll see something like this:
 
 
 Now, lets create our first model 
+
 
     bundle exec rails generate scaffold article title:string body:text
 
