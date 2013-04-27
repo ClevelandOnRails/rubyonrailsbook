@@ -240,7 +240,7 @@ Now, type this in, after `<%= @article.body %>`, and before `<%= form_for([@arti
 
 
     <h2>Comments</h2>
-    <% @article.comments.each do |comment| %>
+   
       <p>
         <strong>Commenter:</strong>
         <%= comment.commenter %>
@@ -250,7 +250,7 @@ Now, type this in, after `<%= @article.body %>`, and before `<%= form_for([@arti
         <strong>Comment:</strong>
         <%= comment.body %>
       </p>
-    <% end %>
+   
 
 Save the file, and refresh your browser. You should see this:
 
@@ -370,7 +370,7 @@ To add the delete link, edit `app/views/comments/_comment.html.erb` to include a
 
       <p>
         <%= link_to 'Destroy Comment', [comment.article, comment],
-                    method: :delete,
+                    method: :destroy,
                     data: { confirm: 'Are you sure?' } %>
       </p>
 
@@ -383,15 +383,15 @@ So right now, if we were to try that, we'd see something like this:
 
 We need to define the `destroy` action in `app/controllers/comments_controller.rb`.
 
-Add the following after `create`, and before the `private`.
+Add the following after `create`, and **before** the `private`.
       
 
-      def destroy
-        @article = Article.find(params[:article_id])
-        @comment = @article.comments.find(params[:id])
-        @comment.destroy
-        redirect_to article_path(@article)
-      end
+    def destroy
+      @article = Article.find(params[:article_id])
+      @comment = @article.comments.find(params[:id])
+      @comment.destroy
+      redirect_to article_path(@article)
+    end
       
 
 So the file looks like this:
