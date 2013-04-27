@@ -240,7 +240,7 @@ Now, type this in, after `<%= @article.body %>`, and before `<%= form_for([@arti
 
 
     <h2>Comments</h2>
-    <% @article.comments.each do |comment| %>
+   
       <p>
         <strong>Commenter:</strong>
         <%= comment.commenter %>
@@ -250,7 +250,7 @@ Now, type this in, after `<%= @article.body %>`, and before `<%= form_for([@arti
         <strong>Comment:</strong>
         <%= comment.body %>
       </p>
-    <% end %>
+   
 
 Save the file, and refresh your browser. You should see this:
 
