@@ -370,7 +370,7 @@ To add the delete link, edit `app/views/comments/_comment.html.erb` to include a
 
       <p>
         <%= link_to 'Destroy Comment', [comment.article, comment],
-                    method: :delete,
+                    method: :destroy,
                     data: { confirm: 'Are you sure?' } %>
       </p>
 
@@ -386,12 +386,12 @@ We need to define the `destroy` action in `app/controllers/comments_controller.r
 Add the following after `create`, and before the `private`.
       
 
-      def destroy
-        @article = Article.find(params[:article_id])
-        @comment = @article.comments.find(params[:id])
-        @comment.destroy
-        redirect_to article_path(@article)
-      end
+    def destroy
+      @article = Article.find(params[:article_id])
+      @comment = @article.comments.find(params[:id])
+      @comment.destroy
+      redirect_to article_path(@article)
+    end
       
 
 So the file looks like this:
