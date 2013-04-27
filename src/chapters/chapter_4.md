@@ -38,6 +38,9 @@ It should have the following contents:
     @import "bootstrap-responsive";
 
 
+*If for some reason it does not show the semicolons at the end of both `@import` lines, please remember to add semicolons*
+
+
 Save the file, and restart your server.
 
 
