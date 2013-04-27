@@ -383,7 +383,7 @@ So right now, if we were to try that, we'd see something like this:
 
 We need to define the `destroy` action in `app/controllers/comments_controller.rb`.
 
-Add the following after `create`, and before the `private`.
+Add the following after `create`, and **before** the `private`.
       
 
       def destroy
