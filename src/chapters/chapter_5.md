@@ -68,7 +68,6 @@ Since this is a work in progress, we will be adding additional chapters to the b
 ###Ruby
 
 - [Ruby Koans](http://rubykoans.com/).
-
 - [Learn Ruby The Hard Way](http://ruby.learncodethehardway.org/).
 - [Ruby Learning](http://rubylearning.com/satishtalim/tutorial.html).
 - [Ruby Monk](http://rubymonk.com/).
@@ -76,15 +75,12 @@ Since this is a work in progress, we will be adding additional chapters to the b
 ###Rails
 
 - [Rails For Zombies](http://railsforzombies.com).
-
 - [Rails Guides](http://guides.rubyonrails.com).
-
 - [Rails Cheatsheet](http://pragtob.github.io/rails-beginner-cheatsheet/).
 
 ###Both:
 
 - [Team Treehouse](http://teamtreehouse.com/).
-
 - [Code School](http://www.codeschool.com/).
 
 

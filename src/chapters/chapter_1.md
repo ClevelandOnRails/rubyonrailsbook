@@ -42,13 +42,13 @@ If it returns 3.2.13, then we need to upgrade Rails to the latest beta.
 
 Run the following command:
 
-    gem install rails --version 4.0.0.beta1 --no-ri --no-rdoc
+    gem install rails --version 4.0.0 --no-ri --no-rdoc
 
 
 And then if you run `rails -v`, it should return:
 
 
-    Rails 4.0.0.beta1
+    Rails 4.0.0
 
 
 Now create the Demo App: Run 
@@ -109,7 +109,7 @@ Open up the `Gemfile`, and make it look like this:
  
     source 'https://rubygems.org'
 
-    gem 'rails', '4.0.0.beta1'
+    gem 'rails', '4.0.0'
 
     group :development, :test do
       gem 'sqlite3', '1.3.5'
@@ -118,8 +118,8 @@ Open up the `Gemfile`, and make it look like this:
     end
 
     group :assets do
-      gem 'sass-rails',   '~> 4.0.0.beta1'
-      gem 'coffee-rails', '~> 4.0.0.beta1'
+      gem 'sass-rails',   '~> 4.0.0'
+      gem 'coffee-rails', '~> 4.0.0'
 
       # See https://github.com/sstephenson/execjs#readme for more supported runtimes
       # gem 'therubyracer', platforms: :ruby
@@ -145,12 +145,6 @@ Open up the `Gemfile`, and make it look like this:
 Save the file (`Ctrl-S` for the Windows and Linux users, `Command-S` for the Mac users)
 
 
-
-And edit `config/application.rb` - look for a line that starts with `config.active_record.whitelist_attributes`, and make it look like this:
-
- 
-
-      config.active_record.whitelist_attributes = false
 
 
 Once you've done that,
@@ -304,15 +298,6 @@ Add in the following line to the model:
 
      include ActiveModel::ForbiddenAttributesProtection
 
-
-If there was a line like
-
- 
-
-      attr_accessible :body, :title
-
-
-In there, then remove it.
 
 
 Well, lets head back to the browser really quick.
