@@ -112,7 +112,7 @@ Open up the `Gemfile`, and make it look like this:
     gem 'rails', '4.0.0'
 
     group :development, :test do
-      gem 'sqlite3', '1.3.5'
+      gem 'sqlite3', '1.3.8'
       gem 'rspec-rails', '2.11.0'
       gem 'annotate', '2.5.0'
     end
